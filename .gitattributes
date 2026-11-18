@@ -1,0 +1,14 @@
+*.py text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.yml text eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+*.yaml binary
+*.json binary
+*.csv binary
+*.gz binary
+*.parquet binary
+*.mdb binary
+.gitignore text eol=lf
+.gitattributes text eol=lf

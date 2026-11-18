@@ -1,0 +1,494 @@
+{
+  "status": "PASS",
+  "checks": {
+    "config_hash": {
+      "pass": true,
+      "details": null
+    },
+    "date_range": {
+      "pass": true,
+      "details": {
+        "min": "2025-01-05",
+        "max": "2026-11-15"
+      }
+    },
+    "race_dates_sorted": {
+      "pass": true,
+      "details": null
+    },
+    "snapshot_post_keys": {
+      "pass": true,
+      "details": null
+    },
+    "snapshot_unique_keys": {
+      "pass": true,
+      "details": 0
+    },
+    "post_unique_keys": {
+      "pass": true,
+      "details": 0
+    },
+    "p0_snapshot_unique_keys": {
+      "pass": true,
+      "details": 0
+    },
+    "event_unique_race_ids": {
+      "pass": true,
+      "details": 6295
+    },
+    "event_snapshot_race_match": {
+      "pass": true,
+      "details": {
+        "events": 6295,
+        "snapshot_races": 6295
+      }
+    },
+    "p2b_prior_type": {
+      "pass": true,
+      "details": null
+    },
+    "p0_separate_prior_type": {
+      "pass": true,
+      "details": null
+    },
+    "p2b_and_p0_keys": {
+      "pass": true,
+      "details": null
+    },
+    "positive_variances": {
+      "pass": true,
+      "details": null
+    },
+    "debut_types": {
+      "pass": true,
+      "details": {
+        "1": 76676,
+        "2": 9492,
+        "3": 827
+      }
+    },
+    "persistent_variance_cap": {
+      "pass": true,
+      "details": {
+        "mismatch_rows": 0,
+        "sample_indices": []
+      }
+    },
+    "effective_variance_not_reduced_by_layoff": {
+      "pass": true,
+      "details": null
+    },
+    "effective_variance_formula": {
+      "pass": true,
+      "details": {
+        "max_error": 1.3322676295501878e-15
+      }
+    },
+    "effective_variance_cap": {
+      "pass": true,
+      "details": {
+        "mismatch_rows": 0,
+        "sample_indices": []
+      }
+    },
+    "elo_pre_formula": {
+      "pass": true,
+      "details": null
+    },
+    "post_values_match": {
+      "pass": true,
+      "details": null
+    },
+    "m_pre_formula": {
+      "pass": true,
+      "details": null
+    },
+    "finite_values": {
+      "pass": true,
+      "details": null
+    },
+    "no_unexplained_rank_zero": {
+      "pass": true,
+      "details": null
+    },
+    "no_rank_abnormal_zero_conflicts": {
+      "pass": true,
+      "details": null
+    },
+    "no_same_horse_same_day": {
+      "pass": true,
+      "details": null
+    },
+    "at_least_two_candidates": {
+      "pass": true,
+      "details": null
+    },
+    "snapshot_state_config_hash": {
+      "pass": true,
+      "details": null
+    },
+    "event_config_hash": {
+      "pass": true,
+      "details": null
+    },
+    "anchor_unique_dates": {
+      "pass": true,
+      "details": null
+    },
+    "anchor_snapshot_date_match": {
+      "pass": true,
+      "details": null
+    },
+    "anchor_values_match": {
+      "pass": true,
+      "details": null
+    },
+    "residual_first_three": {
+      "pass": true,
+      "details": null
+    },
+    "state_unique_horses": {
+      "pass": true,
+      "details": null
+    },
+    "source_unique_runner_keys": {
+      "pass": true,
+      "details": null
+    },
+    "processed_races_still_in_source": {
+      "pass": true,
+      "details": {
+        "missing_races": 0
+      }
+    },
+    "retained_field_counts": {
+      "pass": true,
+      "details": {
+        "mismatch_races": 0
+      }
+    },
+    "non_jra_removed_counts": {
+      "pass": true,
+      "details": {
+        "mismatch_races": 0
+      }
+    },
+    "original_field_counts": {
+      "pass": true,
+      "details": {
+        "mismatch_races": 0
+      }
+    },
+    "relative_finish_ranks": {
+      "pass": true,
+      "details": {
+        "mismatch_rows": 0
+      }
+    },
+    "processed_result_versions_unchanged": {
+      "pass": true,
+      "details": null
+    },
+    "source_race_date_match": {
+      "pass": true,
+      "details": {
+        "mismatch_rows": 0,
+        "sample_indices": []
+      }
+    },
+    "source_condition_code_match": {
+      "pass": true,
+      "details": {
+        "mismatch_rows": 0,
+        "sample_indices": []
+      }
+    },
+    "source_surface_code_match": {
+      "pass": true,
+      "details": {
+        "mismatch_rows": 0,
+        "sample_indices": []
+      }
+    },
+    "source_distance_match": {
+      "pass": true,
+      "details": {
+        "mismatch_rows": 0,
+        "sample_indices": []
+      }
+    },
+    "source_horse_numbers_match": {
+      "pass": true,
+      "details": null
+    },
+    "graph_start_counts": {
+      "pass": true,
+      "details": {
+        "mismatch_rows": 0,
+        "sample_indices": []
+      }
+    },
+    "days_since_start": {
+      "pass": true,
+      "details": {
+        "mismatch_rows": 0,
+        "sample_indices": []
+      }
+    },
+    "persistent_mu_pre_transition": {
+      "pass": true,
+      "details": {
+        "max_error": 0.0
+      }
+    },
+    "persistent_var_pre_persistent_transition": {
+      "pass": true,
+      "details": {
+        "max_error": 0.0
+      }
+    },
+    "same_day_pre_state_consistent": {
+      "pass": true,
+      "details": null
+    },
+    "no_rank_mu_unchanged": {
+      "pass": true,
+      "details": {
+        "no_rank_rows": 271
+      }
+    },
+    "no_rank_var_unchanged": {
+      "pass": true,
+      "details": null
+    },
+    "ranked_var_post_cap": {
+      "pass": true,
+      "details": null
+    },
+    "skip_flag_consistent": {
+      "pass": true,
+      "details": null
+    },
+    "new_debut_codes": {
+      "pass": true,
+      "details": null
+    },
+    "p2b_initial_mu0": {
+      "pass": true,
+      "details": {
+        "max_error": 1.3322676295501878e-15
+      }
+    },
+    "p2b_initial_mu_applied": {
+      "pass": true,
+      "details": null
+    },
+    "p2b_initial_var": {
+      "pass": true,
+      "details": null
+    },
+    "pedigree_status_not_all_missing": {
+      "pass": true,
+      "details": {
+        "OK": 8835,
+        "PARTIAL_HISTORY": 238,
+        "ID_MISSING": 28,
+        "NO_HISTORY": 19
+      }
+    },
+    "non_debut_pedigree_not_used": {
+      "pass": true,
+      "details": null
+    },
+    "new_debut_features_present": {
+      "pass": true,
+      "details": null
+    },
+    "pedigree_status_mapping": {
+      "pass": true,
+      "details": {
+        "OK": 8835,
+        "PARTIAL_HISTORY": 238,
+        "ID_MISSING": 28,
+        "NO_HISTORY": 19
+      }
+    },
+    "final_state_matches_last_post": {
+      "pass": true,
+      "details": null
+    },
+    "final_state_nstarts": {
+      "pass": true,
+      "details": null
+    },
+    "final_state_last_start": {
+      "pass": true,
+      "details": null
+    },
+    "untouched_frozen_state": {
+      "pass": true,
+      "details": null
+    },
+    "state_var_caps": {
+      "pass": true,
+      "details": null
+    },
+    "anchor_active_independent_recalculation": {
+      "pass": true,
+      "details": {
+        "mismatches": 0,
+        "sample": []
+      }
+    },
+    "anchor_new_horse_independent_recalculation": {
+      "pass": true,
+      "details": {
+        "mismatches": 0,
+        "sample": []
+      }
+    },
+    "anchor_threshold_groups": {
+      "pass": true,
+      "details": null
+    },
+    "anchor_daily_delta": {
+      "pass": true,
+      "details": null
+    },
+    "anchor_crossings_limited": {
+      "pass": true,
+      "details": 0
+    },
+    "independent_pl_update_recalculation": {
+      "pass": true,
+      "details": {
+        "mismatch_races": 0,
+        "sample": [],
+        "max_mu_error": 1.7763568394002505e-15,
+        "max_var_error": 1.3322676295501878e-15
+      }
+    },
+    "residual_key_coverage": {
+      "pass": true,
+      "details": {
+        "actual": 20844,
+        "expected": 20844
+      }
+    },
+    "residual_unique_races_horses": {
+      "pass": true,
+      "details": null
+    },
+    "residual_ids_nonnegative": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_cache_fingerprint_current": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_period": {
+      "pass": true,
+      "details": "2017-01-05 00:00:00"
+    },
+    "viewer_unique_keys": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_elo_pre": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_elo_post": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_elo_delta": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_elo_sd": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_p0_present": {
+      "pass": true,
+      "details": 0
+    },
+    "viewer_prior_boost_formula": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_names": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_record_types": {
+      "pass": true,
+      "details": "{'final'}"
+    },
+    "viewer_prior_boost_not_constant": {
+      "pass": true,
+      "details": 86783
+    },
+    "viewer_source_values": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_auxiliary_ids": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_auxiliary_sire_forward_coverage": {
+      "pass": true,
+      "details": {
+        "expected_forward_ids": 389,
+        "missing_ids": 0
+      }
+    },
+    "viewer_auxiliary_bms_forward_coverage": {
+      "pass": true,
+      "details": {
+        "expected_forward_ids": 804,
+        "missing_ids": 0
+      }
+    },
+    "viewer_auxiliary_complete_metrics": {
+      "pass": true,
+      "details": null
+    },
+    "viewer_auxiliary_undefined_rates_explicit": {
+      "pass": true,
+      "details": {
+        "pre_2017_debut_rows": 61
+      }
+    }
+  },
+  "metrics": {
+    "forward_rows": 86995,
+    "forward_races": 6295,
+    "first_race_date": "2025-01-05",
+    "last_race_date": "2026-11-15",
+    "new_starts": 9120,
+    "new_horses": 9120,
+    "new_status": {
+      "OK": 8835,
+      "PARTIAL_HISTORY": 238,
+      "ID_MISSING": 28,
+      "NO_HISTORY": 19
+    },
+    "viewer_rows": 456630,
+    "viewer_future_rows": 86995,
+    "state_horses": 76150,
+    "anchor_days": 206,
+    "residual_rows": 20844,
+    "current_db_sha256": "28dfe7111ce290379990b4c62a71ff9863df0fbe8f2bb88ccb11461f74483ab1",
+    "unprocessed_final_races": 0,
+    "unprocessed_first_date": null,
+    "unprocessed_last_date": null,
+    "max_pl_mu_error": 1.7763568394002505e-15,
+    "max_pl_var_error": 1.3322676295501878e-15,
+    "config_sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9"
+  },
+  "issues": []
+}

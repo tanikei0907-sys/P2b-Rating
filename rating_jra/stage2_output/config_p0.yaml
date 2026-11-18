@@ -1,0 +1,57 @@
+{
+  "anchor_diagnostic": {
+    "N_min": 100,
+    "window_days": 30
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 20241117
+  },
+  "evaluation_weight": "W_share",
+  "input_db_sha256": "cd2b04dc2d369721deba58eedb416a2baa83227280b508415e32e3aa0f6b8327",
+  "model": "P0",
+  "model_implementation": "対角近似オンライン更新（厳密な多変数Newton更新ではない）",
+  "p0": {
+    "beta_kg": 0.0,
+    "kappa": 1.0,
+    "q": 0.01,
+    "tau": 2.122629713348546,
+    "var0": 2.0,
+    "weight": "W_share"
+  },
+  "periods": {
+    "locked": "2025-01-01以降",
+    "tuning": "2017-01-01/2020-12-31",
+    "validation": "2021-01-01/2024-12-31",
+    "warmup": "2012-01-01/2016-12-31"
+  },
+  "prize_points": [
+    100,
+    40,
+    25,
+    15,
+    10,
+    0
+  ],
+  "result_policy": "開催日順に抽出時点の確定結果を1回だけ処理。データ作成年月日は使用しない。",
+  "selection": {
+    "config_id": 208,
+    "eval_pl_nll": 2.370406040511258,
+    "metric": "EvalPLNLL",
+    "period": "2017-01-01/2020-12-31",
+    "race_set": "E",
+    "strategy": "FULL_GRID_216"
+  },
+  "selection_payload_hash": "62a0e4b388e56de422edac08fb45cb1e446dbfb35dca43da3a90696e0d7a52cc",
+  "status": "FROZEN_BEFORE_VALIDATION_EVALUATION",
+  "tau_selection": {
+    "log_tau": 0.7526557508100041,
+    "n_races": 13313,
+    "n_starts": 186411,
+    "optimization_success": true,
+    "race_set": "2017-2020の尤度あり全レース（F相当）",
+    "tau": 2.122629713348546,
+    "winner_ce": 2.3585662571030945
+  },
+  "weight_renormalized_by_K": false
+}

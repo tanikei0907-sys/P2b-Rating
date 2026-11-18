@@ -1,0 +1,37 @@
+{
+  "model": {
+    "name": "P2b",
+    "config_path": "stage3_output/config_p2b.yaml",
+    "config_sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9",
+    "p0_config_path": "stage2_output/config_p0.yaml",
+    "p0_config_sha256": "a06b15ef4e9affe345807b500a6b46fa769a6e1939ad0f309805d4a639a303c8",
+    "frozen_p2b_state_path": "stage3_output/p2b/state_2024-12-31.csv",
+    "frozen_p0_state_path": "stage2_output/state_2024-12-31.csv",
+    "frozen_p0_snapshots_path": "stage2_output/snapshots.csv.gz",
+    "parameters_frozen": true
+  },
+  "database": {
+    "path": "C:\\BaoZ_AI\\DB\\BaoZ_2.mdb",
+    "accepted_snapshot_sha256": "5fa993aadea87e8434797dc073ab03c1a14026e0b36be7174f682542f545c34a",
+    "copy_to_temp": true,
+    "read_only": true,
+    "linked_tables": {
+      "出走馬T": "C:\\BaoZ_AI\\DB\\BaoZ_2.ex.mdb",
+      "出走馬マスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb",
+      "レースマスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb",
+      "産駒マスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb"
+    }
+  },
+  "output": {
+    "directory": "p2b_forward",
+    "backup_directory": "p2b_forward/backups",
+    "temp_directory": "p2b_forward/work",
+    "archive_directory": "p2b_forward_legacy"
+  },
+  "processing": {
+    "start_date": "2025-01-01",
+    "end_date": null,
+    "predict_date": null,
+    "final_result_data_division": 7
+  }
+}

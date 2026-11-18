@@ -1,0 +1,17 @@
+{
+  "database": {
+    "path": "C:\\BaoZ_AI\\DB\\BaoZ_2.mdb",
+    "linked_tables": {
+      "出走馬T": "C:\\BaoZ_AI\\DB\\BaoZ_2.ex.mdb",
+      "出走馬マスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb",
+      "レースマスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb",
+      "競走馬マスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb",
+      "産駒マスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb",
+      "繁殖馬マスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb"
+    }
+  },
+  "paths": {
+    "output_dir": "p2b_forward",
+    "cache_dir": "cache"
+  }
+}

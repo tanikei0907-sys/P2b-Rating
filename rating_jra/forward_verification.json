@@ -1,0 +1,125 @@
+{
+  "status": "PASS",
+  "adopted_model": "P2b",
+  "config_sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9",
+  "forward_tests": {
+    "dummy_2025_races": 3,
+    "update_idempotency": "PASS",
+    "predict_snapshot_state_unchanged": "PASS",
+    "elo_pre_exact_match": "PASS",
+    "rollback_restore": "PASS",
+    "hash_rejection_before_output": "PASS",
+    "temporary_files_deleted": true,
+    "predict_snapshot_pre_only": "PASS"
+  },
+  "existing_tests": {
+    "count": 26,
+    "result": "PASS",
+    "includes_viewer_tests": true
+  },
+  "powershell_syntax": "PASS",
+  "protected_files_unchanged": 27,
+  "production_update_executed": true,
+  "production_prediction_executed": false,
+  "initial_failure_fixes": {
+    "wrapper_config_path_resolution": "PASS",
+    "linked_database_copy_and_relink": "PASS",
+    "final_data_division_string_filter": "PASS",
+    "full_forward_tests": {
+      "count": 3,
+      "result": "PASS"
+    },
+    "production_rerun_performed": false
+  },
+  "performance_fixes": {
+    "db_hash_computed_once_per_run": true,
+    "harville_top3_direct_enumeration": "PASS",
+    "subprocess_output_encoding": "PASS",
+    "forward_tests": {
+      "count": 3,
+      "result": "PASS"
+    }
+  },
+  "input_snapshot_integrity": {
+    "review": "snapshot_integrity_review.json",
+    "expected_sha256": "cd2b04dc2d369721deba58eedb416a2baa83227280b508415e32e3aa0f6b8327",
+    "actual_sha256": "5fa993aadea87e8434797dc073ab03c1a14026e0b36be7174f682542f545c34a",
+    "stage2_verification": "INPUT_HASH_MISMATCH",
+    "p0_nll_invariance_test": "PASS",
+    "accepted_by_user": true
+  },
+  "aborted_run": {
+    "latest_run_manifest_exists": false,
+    "result_events_exists": false,
+    "committed_updates": 0,
+    "safe_to_rerun_after_integrity_review": true
+  },
+  "initial_update_completed": {
+    "run_id": "20261117T200759Z_87544d42",
+    "new_races": 6295,
+    "first_race_date": "2025-01-05",
+    "last_race_date": "2026-11-15",
+    "snapshot_rows": 86995,
+    "residual_history_rows": 20844,
+    "anchor_days": 206,
+    "state_horses": 76150,
+    "production_input_db_sha256": "991f2def9c432dc4a9903970e7747e075c0bb9baf64f45ae2c286f8690645281",
+    "backup": "C:\\BaoZ_AI\\keiba_ai_project_v3\\rating_jra\\p2b_forward\\backups\\20261117T200759Z_87544d42"
+  },
+  "idempotency": {
+    "status": "NO_NEW_RACES",
+    "files_unchanged": true
+  },
+  "viewer": {
+    "status": "PASS",
+    "verification": "viewer_verification.json",
+    "http_health_check": 200,
+    "rows": 456630,
+    "cache_read_seconds": 0.583,
+    "class_condition_display": "PASS",
+    "prior_boost_2025plus": "PASS"
+  },
+  "prior_distribution_verification": {
+    "status": "PASS",
+    "review": "forward_prior_verification.json",
+    "new_starts": 9120,
+    "mu0_max_abs_error": 1.3322676295501878e-15,
+    "predict_new_horse_prior_test": "PASS",
+    "code_changes_required": true,
+    "fix_status": "PASS",
+    "constant_rows_2025plus": 24,
+    "constant_status": {
+      "NO_HISTORY": 14,
+      "ID_MISSING": 10
+    },
+    "new_status": {
+      "OK": 8835,
+      "PARTIAL_HISTORY": 238,
+      "ID_MISSING": 28,
+      "NO_HISTORY": 19
+    },
+    "rebuild_run_id": "20261118T005854Z_e02d3249"
+  },
+  "comprehensive_review": {
+    "review": "forward_comprehensive_audit.json",
+    "status": "PASS",
+    "checks_passed": 94,
+    "forward_rows": 86995,
+    "forward_races": 6295,
+    "unprocessed_final_races": 0,
+    "max_mu_error_independent_recalculation": 1.7763568394002505e-15,
+    "max_var_error_independent_recalculation": 1.3322676295501878e-15,
+    "initial_mu0_max_abs_error": 1.3322676295501878e-15,
+    "frozen_files_verified_unchanged": 117,
+    "production_rating_rebuild_required": false,
+    "production_rating_files_unchanged": true,
+    "idempotency": "PASS",
+    "all_tests": {
+      "count": 26,
+      "result": "PASS"
+    },
+    "actual_viewer_tabs_test": "PASS",
+    "http_health_check": 200,
+    "completed_at_utc": "2026-11-18T02:09:36.227584+00:00"
+  }
+}

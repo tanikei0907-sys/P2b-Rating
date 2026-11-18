@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "code_changes_required": true,
+  "fix": "産駒マスタ欠損時に競走馬マスタの繁殖登録番号1=父・繁殖登録番号5=母父を使用",
+  "new_starts": 9120,
+  "mu0_max_abs_error": 1.3322676295501878e-15,
+  "constant_rows_2025plus": 24,
+  "constant_status": {
+    "NO_HISTORY": 14,
+    "ID_MISSING": 10
+  },
+  "new_status": {
+    "OK": 8835,
+    "PARTIAL_HISTORY": 238,
+    "ID_MISSING": 28,
+    "NO_HISTORY": 19
+  },
+  "rebuild_run_id": "20261118T005854Z_e02d3249",
+  "predict_new_horse_prior_test": "PASS",
+  "p2b_config_sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9",
+  "viewer_prior_boost": {
+    "status": "PASS",
+    "rows": 86995,
+    "nonzero_prior_boost": 86995,
+    "p0_mu_pre_nulls": 0
+  },
+  "comprehensive_audit": {
+    "status": "PASS",
+    "report": "forward_comprehensive_audit.json",
+    "independent_pl_update_max_mu_error": 1.7763568394002505e-15,
+    "independent_pl_update_max_var_error": 1.3322676295501878e-15,
+    "production_rating_rebuild_required": false
+  }
+}

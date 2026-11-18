@@ -1,0 +1,115 @@
+{
+  "status": "PASS",
+  "p2b_config_sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9",
+  "rows": 456630,
+  "auxiliary_rows": 2219,
+  "min_race_date": "2017-01-05",
+  "max_race_date": "2026-11-15",
+  "record_types": {
+    "final": 456630
+  },
+  "tabs": [
+    "レース別",
+    "馬別推移",
+    "ランキング",
+    "血統評価"
+  ],
+  "cache_files": {
+    "merged": {
+      "path": "C:\\BaoZ_AI\\keiba_ai_project_v3\\rating_jra\\cache\\viewer_merged_2017plus.parquet",
+      "bytes": 66169051,
+      "sha256": "92a1a09ca1fa10aedc2bd1731125fcca090b4956298d864eb44fd760e71ab845"
+    },
+    "auxiliary": {
+      "path": "C:\\BaoZ_AI\\keiba_ai_project_v3\\rating_jra\\cache\\viewer_auxiliary.parquet",
+      "bytes": 146092,
+      "sha256": "3446f4569a5a049ca68f999c2cc072604366d974eba3964bd70c32ef51566c07"
+    }
+  },
+  "cache_read_seconds": 0.583,
+  "http_health_check": {
+    "status_code": 200,
+    "url": "http://127.0.0.1:8501"
+  },
+  "predict_snapshot_support": true,
+  "predict_snapshot_files_present": 0,
+  "source_files_modified": false,
+  "class_condition_display": {
+    "enabled": true,
+    "grade_age_fields_present": true,
+    "examples": [
+      "2歳未勝利",
+      "3歳以上2勝クラス 東京優駿",
+      "3歳以上GI 有馬記念",
+      "2歳GI",
+      "4歳以上オープン"
+    ],
+    "blank_race_name_omitted": true
+  },
+  "pedigree_fallback": {
+    "status": "PASS",
+    "constant_rows_2025plus": 24,
+    "constant_status": {
+      "NO_HISTORY": 14,
+      "ID_MISSING": 10
+    },
+    "new_status": {
+      "OK": 8835,
+      "PARTIAL_HISTORY": 238,
+      "ID_MISSING": 28,
+      "NO_HISTORY": 19
+    },
+    "http_health_check": 200
+  },
+  "prior_boost_2025plus": {
+    "status": "PASS",
+    "rows": 86995,
+    "p0_mu_pre_nulls": 0,
+    "nonzero_prior_boost": 86995,
+    "example": [
+      {
+        "race_id": 22501050601,
+        "horse_id": 2022100076,
+        "mu_pre": 0.7435581823629999,
+        "p0_mu_pre": 1.87109620727,
+        "elo_prior_boost": -195.87341694128057
+      },
+      {
+        "race_id": 22501050601,
+        "horse_id": 2022100105,
+        "mu_pre": 1.39204295696,
+        "p0_mu_pre": 2.19366530244,
+        "elo_prior_boost": -139.25606448492246
+      },
+      {
+        "race_id": 22501050601,
+        "horse_id": 2022101022,
+        "mu_pre": 0.5226614832039999,
+        "p0_mu_pre": 1.67128647645,
+        "elo_prior_boost": -199.53659853715908
+      }
+    ]
+  },
+  "comprehensive_review": {
+    "status": "PASS",
+    "report": "forward_comprehensive_audit.json",
+    "checks_passed": 94,
+    "all_tests": 26,
+    "actual_data_tabs_test": "PASS",
+    "predict_snapshot_pre_features_only": "PASS",
+    "predict_snapshot_derived_elo_columns": "PASS",
+    "unconfirmed_master_join_and_final_priority": "PASS",
+    "elo_prior_boost_missing_p0_remains_null": true,
+    "pedigree_aggregation_period": "2017-01-01以降",
+    "pedigree_aggregation_includes_forward_residuals": true,
+    "auxiliary_rows_by_side": {
+      "sire": 851,
+      "bms": 1368
+    },
+    "forward_only_sire_ids_added": 130,
+    "undefined_new_horse_rate_rows_pre_2017_debut": 61,
+    "source_files_modified": false,
+    "frozen_files_verified_unchanged": 117
+  },
+  "completed_at_utc": "2026-11-18T02:09:36.227584+00:00"
+}

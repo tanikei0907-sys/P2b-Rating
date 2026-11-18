@@ -1,0 +1,83 @@
+{
+  "snapshots": {
+    "path": "stage3_output/p2b/snapshots.csv.gz",
+    "size": 53848923,
+    "sha256": "e932ea0aba893ec4c070780be8424ceeefb83dd1d1358c8c2d872a57ca2f171b"
+  },
+  "posts": {
+    "path": "stage3_output/p2b/post_updates.csv.gz",
+    "size": 12673299,
+    "sha256": "fcb17263d758f9f3518b5617e78246f18edc14254726f407efbaf78e4290d03b"
+  },
+  "anchor": {
+    "path": "stage3_output/p2b/mu_anchor_daily.csv",
+    "size": 166430,
+    "sha256": "d379da8421e59a7d07e748657f7dbb43fa950123b488a85bc37dd23895f9c637"
+  },
+  "forward_snapshots": {
+    "path": "p2b_forward/snapshots_2025plus.csv.gz",
+    "size": 10721314,
+    "sha256": "aec81988f809ee9bfbc69b327a590c5d7a7efeeaa0512e3d3dcfe9ce0e1ee1f9"
+  },
+  "forward_posts": {
+    "path": "p2b_forward/post_updates_2025plus.csv.gz",
+    "size": 2308165,
+    "sha256": "b0b2e04803095474c344adaa81a58eaed3a12575a47713acbe1c19539bae3f32"
+  },
+  "forward_anchor": {
+    "path": "p2b_forward/mu_anchor_daily_2025plus.csv",
+    "size": 28672,
+    "sha256": "3a74a42d8ceb67771bd5b59279aa443194b4bb2767de33d5b5b9f4de33ee16b6"
+  },
+  "p0_snapshots": {
+    "path": "stage2_output/snapshots.csv.gz",
+    "size": 34372431,
+    "sha256": "d6784ad8010e01a760a5240d92096ae70295d249387ebdda9d409c26664e6ebf"
+  },
+  "forward_p0_snapshots": {
+    "path": "p2b_forward/p0_residual_snapshots_2025plus.csv.gz",
+    "size": 6786316,
+    "sha256": "0f9603dc99b4612bbd635260d16d0bb5e33f2a11d92ec4ef2f17d1249603b614"
+  },
+  "sire_auxiliary": {
+    "path": "stage3_output/sire_auxiliary.csv",
+    "size": 56722,
+    "sha256": "abef89304d02f0a4222d9d28fabd7c3511fef1babd5feeae9bce0e62a81903cd"
+  },
+  "bms_auxiliary": {
+    "path": "stage3_output/bms_auxiliary.csv",
+    "size": 88523,
+    "sha256": "100ca7aa09ef17c23f265f6bfe342a8f75c30f18144b3ac3a698089067553548"
+  },
+  "residual_history": {
+    "path": "stage3_output/pedigree_residual_history.csv.gz",
+    "size": 3705921,
+    "sha256": "9859b6cd4a8c0ce7e5c82f6063abce594427452709c3a0945e956449e99a50d9"
+  },
+  "forward_residual": {
+    "path": "p2b_forward/pedigree_residual_history_2025plus.csv.gz",
+    "size": 661707,
+    "sha256": "1cc94abac0edc2e42fbdbf9915ee832d7902f6a01d69f9bd3825bfb58fd04251"
+  },
+  "p2b_config": {
+    "path": "stage3_output/config_p2b.yaml",
+    "size": 5711,
+    "sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9"
+  },
+  "viewer_config": {
+    "path": "viewer_config.yaml",
+    "size": 572,
+    "sha256": "305135481a7c7900e2d398d9615322f8b1e1a383aa93cf22f48ba17ac48930a5"
+  },
+  "viewer_data": {
+    "path": "viewer_data.py",
+    "size": 16796,
+    "sha256": "7ad86cb1339a35697d96e666e04ed1b1ee13ef9c9f8031771a45bceaeae03a3b"
+  },
+  "viewer_app": {
+    "path": "rating_viewer.py",
+    "size": 13708,
+    "sha256": "dd7f6552e78fd94ba16eb6292f5d1d7475c3db67a3613ff8700625eab0967225"
+  },
+  "predict_snapshots": []
+}
