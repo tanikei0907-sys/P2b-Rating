@@ -71,8 +71,8 @@
   },
   "viewer_data": {
     "path": "viewer_data.py",
-    "size": 16796,
-    "sha256": "7ad86cb1339a35697d96e666e04ed1b1ee13ef9c9f8031771a45bceaeae03a3b"
+    "size": 16804,
+    "sha256": "9cb3fee1fa595afe042f0f68bf580649b0692422da174283ae68a11faa4b065d"
   },
   "viewer_app": {
     "path": "rating_viewer.py",

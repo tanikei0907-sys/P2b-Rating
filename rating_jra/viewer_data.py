@@ -9,9 +9,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from forward_ops import copy_database
 from rating_core import file_sha256
-from rating_pedigree import load_pedigree_ids
 
 BASE_DIR = Path(__file__).resolve().parent
 EXPECTED_P2B_HASH = "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9"
@@ -159,6 +157,8 @@ def cleanup_access_lock_files(directory: str | Path) -> None:
 
 
 def load_master(config: dict) -> dict[str, pd.DataFrame]:
+    from forward_ops import copy_database
+    from rating_pedigree import load_pedigree_ids
     linked = config["database"].get("linked_tables", {})
     predict_dates = sorted({
         pd.to_datetime(path.stem.rsplit("_", 1)[-1], format="%Y%m%d").strftime("%Y-%m-%d")

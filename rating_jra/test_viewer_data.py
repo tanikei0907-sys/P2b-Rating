@@ -127,6 +127,12 @@ class ViewerDataTest(unittest.TestCase):
             self.assertTrue(all("mtime_ns" not in item and "sha256" in item for item in fingerprint.values() if isinstance(item, dict)))
             self.assertNotIn(str(BASE).replace("\\", "/"), json.dumps(fingerprint))
 
+    def test_cached_viewer_does_not_import_database_modules(self):
+        import subprocess
+        import sys
+        code = "import sys; import viewer_data; assert 'pyodbc' not in sys.modules; assert 'forward_ops' not in sys.modules; assert 'rating_pedigree' not in sys.modules"
+        subprocess.run([sys.executable, "-c", code], cwd=BASE, check=True)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
