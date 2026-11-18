@@ -21,6 +21,12 @@ run_viewer.bat
 
 キャッシュは内容ハッシュで照合します。CSV・設定・コードが変わったときだけ再生成され、その場合は馬王Z DBが必要です。
 
+## Streamlit Cloud
+
+GitHubリポジトリ`tanikei0907-sys/P2b-Rating`の`main`ブランチを指定し、Main file pathを`rating_jra/rating_viewer.py`としてデプロイします。CloudのPython versionは3.13を選択します。Python依存関係は`requirements.txt`、LinuxのODBC依存関係は`packages.txt`で定義しています。閲覧時にはDB接続用モジュールを遅延読み込みし、同梱キャッシュを利用するため、Streamlit Secretsや馬王Z DBは不要です。
+
+`main`ブランチへのpush後にCloud側へ変更を反映します。レーティング更新・予測ラッパーはデータとキャッシュもpushするため、Cloudでも最新の公開データを閲覧できます。馬王Zを使った更新そのものはローカルPCで実行します。
+
 ## データと公開範囲
 
 - 凍結済みP0/P2bの設定と、運用に必要な2012年以降のレーティング出力
