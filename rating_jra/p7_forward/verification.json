@@ -1,0 +1,175 @@
+{
+  "status": "PASS",
+  "checks": {
+    "config_hash": {
+      "pass": true,
+      "details": null
+    },
+    "unique_snapshot_keys": {
+      "pass": true,
+      "details": null
+    },
+    "snapshot_post_values": {
+      "pass": true,
+      "details": null
+    },
+    "unique_events": {
+      "pass": true,
+      "details": null
+    },
+    "config_hashes": {
+      "pass": true,
+      "details": null
+    },
+    "output_hashes": {
+      "pass": true,
+      "details": null
+    },
+    "finite_decomposed_features": {
+      "pass": true,
+      "details": null
+    },
+    "elo_decomposition": {
+      "pass": true,
+      "details": null
+    },
+    "state_finite": {
+      "pass": true,
+      "details": null
+    },
+    "date_range": {
+      "pass": true,
+      "details": null
+    },
+    "interaction_L1": {
+      "pass": true,
+      "details": null
+    },
+    "independent_p7_update": {
+      "pass": true,
+      "details": {
+        "max_mu_error": 4.440892098500626e-15,
+        "max_var_error": 2.220446049250313e-15
+      }
+    },
+    "no_rank_state_unchanged": {
+      "pass": true,
+      "details": null
+    },
+    "graph_start_counts": {
+      "pass": true,
+      "details": null
+    },
+    "days_since_start": {
+      "pass": true,
+      "details": null
+    },
+    "continuity_sample10_available": {
+      "pass": true,
+      "details": {
+        "rows": 10
+      }
+    },
+    "continuity_sample10_values": {
+      "pass": true,
+      "details": {
+        "horses": [
+          2014102562,
+          2014104716,
+          2015100274,
+          2015104364,
+          2016100126,
+          2016100297,
+          2016100752,
+          2016101865,
+          2016102073,
+          2016102080
+        ],
+        "max_error": 8.881784197001252e-16
+      }
+    },
+    "forward_propagation_events": {
+      "pass": true,
+      "details": {
+        "events": 944811,
+        "duplicate_keys": 0,
+        "self_events": 0,
+        "same_day_target_starts": 0,
+        "inactive_targets": 0,
+        "source_date_mismatches": 0,
+        "source_delta_mismatches": 0,
+        "future_or_same_day_history": 0,
+        "latest_past_date_mismatches": 0,
+        "mean_relative_mismatches": 0,
+        "max_applied_delta_error": 1.1102230246251565e-16,
+        "max_source_delta_error": 4.551914400963142e-15,
+        "max_mean_relative_error": 1.1102230246251565e-16
+      }
+    },
+    "sire_asof": {
+      "pass": true,
+      "details": null
+    },
+    "bms_asof": {
+      "pass": true,
+      "details": null
+    },
+    "pedigree_features_asof": {
+      "pass": true,
+      "details": {
+        "mismatches": 0
+      }
+    },
+    "residuals_from_forward_p7_scores": {
+      "pass": true,
+      "details": {
+        "max_error": 6.217248937900877e-15
+      }
+    },
+    "final_state_base": {
+      "pass": true,
+      "details": null
+    },
+    "final_state_starts": {
+      "pass": true,
+      "details": null
+    },
+    "final_pending_propagation": {
+      "pass": true,
+      "details": null
+    },
+    "protected_assets_unchanged": {
+      "pass": true,
+      "details": {
+        "status": "PASS",
+        "protected_files": 250,
+        "added": [],
+        "removed": [],
+        "changed": []
+      }
+    },
+    "idempotency": {
+      "pass": true,
+      "details": {
+        "status": "NO_NEW_RACES",
+        "files_unchanged": true
+      }
+    }
+  },
+  "metrics": {
+    "first_race_date": "2025-01-05",
+    "last_race_date": "2026-11-15",
+    "races": 6295,
+    "starts": 86995,
+    "state_horses": 76150,
+    "propagation_events": 944811,
+    "interaction_rows": 75978,
+    "residual_rows": 20844,
+    "continuity_samples": 10,
+    "max_update_mu_error": 4.440892098500626e-15,
+    "max_update_var_error": 2.220446049250313e-15,
+    "max_residual_error": 6.217248937900877e-15,
+    "config_sha256": "3246e20ccee1102638213235d6b9e6f373079de6165fda16ddc3ae76d4b9e174"
+  },
+  "issues": []
+}

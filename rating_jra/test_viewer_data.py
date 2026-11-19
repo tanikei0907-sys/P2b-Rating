@@ -42,8 +42,9 @@ def viewer_rows() -> pd.DataFrame:
                 "horse_id": 2023000000 + horse, "horse_name": f"馬{horse}", "venue_name": "東京",
                 "race_number": 11, "race_age_code": 11, "grade_code": "", "condition_code": 5,
                 "race_name": "テスト特別", "condition_name": "2歳1勝クラス", "distance": 1600,
-                "surface_code": 0, "official_finish": horse if mode == "final" else 0,
-                "elo_pre": 1500 + horse, "elo_sd": 100.0, "elo_prior_boost": 10.0,
+                "surface_code": 0, "surface": "芝", "official_finish": horse if mode == "final" else 0,
+                "elo_pre": 1500 + horse, "elo_base_pre": 1500 + 0.5 * horse,
+                "elo_surface_adjustment": 0.5 * horse, "elo_sd": 100.0, "elo_prior_boost": 10.0,
                 "elo_post": 1501 + horse if mode == "final" else np.nan,
                 "elo_delta": float(horse) if mode == "final" else np.nan,
                 "mu_pre": 0.1 * horse, "var_pre_eff": 0.4, "n_graph_starts": 3,
@@ -58,11 +59,15 @@ class ViewerDataTest(unittest.TestCase):
             path = Path(temporary) / "predict_snapshots_20261122.csv"
             pd.DataFrame([
                 {"race_id": 900001, "race_date": "2026-11-22", "horse_id": 2023000001,
-                 "mu_pre": 0.1, "var_pre_eff": 0.25, "mu_bar_D": 0.05}
+                 "mu_pre": 0.1, "mu_base_pre": 0.06, "surface_offset_pre": 0.04,
+                 "var_pre_eff": 0.25, "mu_bar_D": 0.05, "surface_code": 0}
             ]).to_csv(path, index=False)
             frame = read_snapshot(path, "predict")
         row = frame.iloc[0]
         self.assertAlmostEqual(row["elo_pre"], 1500 + SCALE * 0.05)
+        self.assertAlmostEqual(row["elo_base_pre"], 1500 + SCALE * 0.01)
+        self.assertAlmostEqual(row["elo_surface_adjustment"], SCALE * 0.04)
+        self.assertAlmostEqual(row["elo_pre"], row["elo_base_pre"] + row["elo_surface_adjustment"])
         self.assertAlmostEqual(row["elo_sd"], SCALE * 0.5)
         self.assertTrue(pd.isna(row["elo_post"]))
         self.assertTrue(pd.isna(row["elo_delta"]))
@@ -99,7 +104,7 @@ class ViewerDataTest(unittest.TestCase):
             {"race_date": "2025-02-01", "horse_id": 11, "n_graph_starts": 1, "sire_id": 1, "bms_id": 2, "actual_win": 1.0, "actual_top3": 1.0, "r_win": 0.8, "r_top3": 0.7},
             {"race_date": "2025-03-01", "horse_id": 11, "n_graph_starts": 2, "sire_id": 1, "bms_id": 2, "actual_win": 0.0, "actual_top3": 0.0, "r_win": -0.2, "r_top3": -0.3},
         ])
-        with patch("viewer_data.pd.read_csv", side_effect=lambda path, **kwargs: history.iloc[:1].copy() if "stage3_output" in str(path) else history.iloc[1:].copy()):
+        with patch("viewer_data.pd.read_csv", side_effect=lambda path, **kwargs: history.iloc[:1].copy() if "p7_propagation" in str(path) else history.iloc[1:].copy()):
             auxiliary = load_auxiliary(minimal_master(["7"]))
         row = auxiliary[auxiliary["side"].eq("sire") & auxiliary["sire_id"].eq(1)].iloc[0]
         self.assertEqual(row["offspring"], 1)

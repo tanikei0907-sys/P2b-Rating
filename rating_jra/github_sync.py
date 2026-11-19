@@ -9,19 +9,51 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SYNC_PATHS = [
-    "rating_jra/p4_forward/snapshots_2025plus.csv.gz",
-    "rating_jra/p4_forward/post_updates_2025plus.csv.gz",
-    "rating_jra/p4_forward/state_latest.csv",
-    "rating_jra/p4_forward/pedigree_residual_history_2025plus.csv.gz",
-    "rating_jra/p4_forward/mu_anchor_daily_2025plus.csv",
-    "rating_jra/p4_forward/result_events_2025plus.csv",
-    "rating_jra/p4_forward/margins_2025plus.csv.gz",
-    "rating_jra/p4_forward/margin_multipliers_2025plus.csv.gz",
-    "rating_jra/p4_forward/latest_run_manifest.json",
+    "rating_jra/p7_propagation/selected_config.json",
+    "rating_jra/p7_propagation/final_model.json",
+    "rating_jra/p7_propagation/snapshots.csv.gz",
+    "rating_jra/p7_propagation/post_updates.csv.gz",
+    "rating_jra/p7_propagation/mu_anchor_daily.csv",
+    "rating_jra/p7_propagation/pedigree_residual_history.csv.gz",
+    "rating_jra/p7_propagation/state_2024-12-31.csv",
+    "rating_jra/p7_propagation/interaction_history_latest.csv.gz",
+    "rating_jra/p6_age/selected_config.json",
+    "rating_jra/p6_age/horse_demographics.csv",
+    "rating_jra/p7_forward/forward_config.yaml",
+    "rating_jra/p7_forward/snapshots_2025plus.csv.gz",
+    "rating_jra/p7_forward/post_updates_2025plus.csv.gz",
+    "rating_jra/p7_forward/state_latest.csv",
+    "rating_jra/p7_forward/pedigree_residual_history_2025plus.csv.gz",
+    "rating_jra/p7_forward/mu_anchor_daily_2025plus.csv",
+    "rating_jra/p7_forward/result_events_2025plus.csv",
+    "rating_jra/p7_forward/propagation_events_2025plus.csv.gz",
+    "rating_jra/p7_forward/interaction_history_latest.csv.gz",
+    "rating_jra/p7_forward/margins_2025plus.csv.gz",
+    "rating_jra/p7_forward/margin_multipliers_2025plus.csv.gz",
+    "rating_jra/p7_forward/latest_run_manifest.json",
+    "rating_jra/p7_update_for_features.py",
+    "rating_jra/p7_forward_ops.py",
+    "rating_jra/p7_forward_engine.py",
+    "rating_jra/p7_forward_verify.py",
+    "rating_jra/p7_forward/verification.json",
+    "rating_jra/p7_forward/continuity_sample10.csv",
+    "rating_jra/github_sync.py",
+    "rating_jra/test_p7_forward.py",
+    "rating_jra/test_viewer_data.py",
+    "rating_jra/test_github_sync.py",
+    "rating_jra/viewer_data.py",
+    "rating_jra/rating_viewer.py",
+    "rating_jra/viewer_config.yaml",
+    "rating_jra/README_viewer.md",
+    "rating_jra/README_forward_ops.md",
+    "run_rating_update.ps1",
+    "run_rating_update.bat",
+    "run_predict_snapshot.ps1",
+    "run_predict_snapshot.bat",
     "rating_jra/cache/viewer_merged_2017plus.parquet",
     "rating_jra/cache/viewer_auxiliary.parquet",
     "rating_jra/cache/viewer_source_fingerprint.json",
-    ":(glob)rating_jra/p4_forward/predict_snapshots_*.csv",
+    ":(glob)rating_jra/p7_forward/predict_snapshots_*.csv",
 ]
 
 
@@ -42,7 +74,7 @@ def sync_github(root: Path = PROJECT_ROOT, push: bool = True, refresh_cache: boo
     root = root.resolve()
     if run_git(root, "rev-parse", "--is-inside-work-tree").stdout.strip() != "true":
         raise RuntimeError("Gitリポジトリではありません")
-    lock_path = root / ".git/p4-rating-sync.lock"
+    lock_path = root / ".git/p7-rating-sync.lock"
     try:
         descriptor = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
     except FileExistsError as error:
@@ -54,15 +86,15 @@ def sync_github(root: Path = PROJECT_ROOT, push: bool = True, refresh_cache: boo
             from viewer_data import load_viewer_config, load_viewer_data
             load_viewer_data(load_viewer_config(root / "rating_jra/viewer_config.yaml"))
         paths = [path for path in SYNC_PATHS if not path.startswith(":(glob)") and (root / path).exists()]
-        if list(root.glob("rating_jra/p4_forward/predict_snapshots_*.csv")):
-            paths.append(":(glob)rating_jra/p4_forward/predict_snapshots_*.csv")
+        if list(root.glob("rating_jra/p7_forward/predict_snapshots_*.csv")):
+            paths.append(":(glob)rating_jra/p7_forward/predict_snapshots_*.csv")
         if not paths:
             raise RuntimeError("同期対象の出力ファイルがありません")
         run_git(root, "add", "--", *paths)
         changed = run_git(root, "diff", "--cached", "--quiet", "--", *paths, check=False).returncode != 0
         commit = None
         if changed:
-            message = "Update P4 rating data: " + datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+            message = "Update P7 rating data: " + datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
             run_git(root, "commit", "-m", message, "--", *paths)
             commit = run_git(root, "rev-parse", "HEAD").stdout.strip()
         if push:
@@ -84,7 +116,7 @@ def sync_github(root: Path = PROJECT_ROOT, push: bool = True, refresh_cache: boo
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="P4の出力とビューワーキャッシュをGitHubへ公開します")
+    parser = argparse.ArgumentParser(description="P7の出力とビューワーキャッシュをGitHubへ公開します")
     parser.add_argument("--no-push", action="store_true", help="ローカルcommitまで実行します")
     parser.add_argument("--no-cache-refresh", action="store_true", help="テスト用。キャッシュを再生成しません")
     args = parser.parse_args()
