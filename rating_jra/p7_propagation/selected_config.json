@@ -1,0 +1,51 @@
+{
+  "model": "P7",
+  "status": "FROZEN_BEFORE_P7_VALIDATION",
+  "propagation": {
+    "L": 1,
+    "eta": 0.07500000000000001,
+    "method": "A",
+    "tau_prop": 30.0
+  },
+  "baseline_model": "P6",
+  "baseline_config_sha256": "b433360ecf33afe503b3ca73cac8da57f2c0c3eab30462f538a4dab95867a730",
+  "inherited_p6": {
+    "alpha1": 0.1,
+    "alpha2": 0.05,
+    "alpha3": -0.15,
+    "surface_parameters": {
+      "base_var_scale": 0.75,
+      "var_surf0": 1.5,
+      "q_surf": 0.03
+    }
+  },
+  "margin_rule": "min(2.0, 1 + 2 * raw_delta_t_k)",
+  "tuning_period": "2012-01-01/2020-12-31",
+  "tuning_nll": 2.3362667487358357,
+  "tuning_races": 29936,
+  "candidate_count": 77,
+  "p6_control_tuning_nll": 2.338429058409451,
+  "full_hessian_control_tuning_nll": 2.339790470771674,
+  "baseline_tuning_nll_same_period_F": 2.338429058409455,
+  "best_method_A": {
+    "L": 1,
+    "eta": 0.07500000000000001,
+    "method": "A",
+    "tau_prop": 30.0
+  },
+  "best_method_B": {
+    "M": 15,
+    "gamma_cov": 0.30000000000000004,
+    "method": "B",
+    "tau_prop": 365.0
+  },
+  "p4_config_sha256": "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1",
+  "p2b_config_sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9",
+  "input_db_sha256": "5fa993aadea87e8434797dc073ab03c1a14026e0b36be7174f682542f545c34a",
+  "prior_policy": "P1・P2b係数と標準化定数を固定し、初期3走残差をP7自身のas-of軌道から逐次生成",
+  "evaluation_nll": "標準W_share PL-NLL。着差倍率・フルヘッセ・伝播は更新のみ",
+  "propagation_policy": "開催日の全レース更新後に一次伝播。自身・同日出走馬・非現役馬を除外",
+  "variance_safety": "方式BはSPD精度行列から共分散を計算し、分散下限1e-8と平均補正clipを適用",
+  "selected_at_utc": "2026-11-19T21:22:58.474085+00:00",
+  "validation_period_untouched_during_selection": true
+}

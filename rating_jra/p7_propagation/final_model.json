@@ -1,0 +1,27 @@
+{
+  "status": "FINAL_MODEL_CONFIRMED",
+  "adopted_model": "P7",
+  "decision": "P7_ADOPTED",
+  "config_sha256": "3246e20ccee1102638213235d6b9e6f373079de6165fda16ddc3ae76d4b9e174",
+  "p7_config_sha256": "3246e20ccee1102638213235d6b9e6f373079de6165fda16ddc3ae76d4b9e174",
+  "p7_research_output_hashes": {
+    "selected_config.json": "3246e20ccee1102638213235d6b9e6f373079de6165fda16ddc3ae76d4b9e174",
+    "snapshots.csv.gz": "8842eaa7d3098feaa4d24b88e27c012dcd183f7de03fab15125fd700f9db1238",
+    "post_updates.csv.gz": "3a2d5eb115b1a89bd53cc528dfd485f8b95646c8606f3fdbe8cf92fe00d10a57",
+    "state_2024-12-31.csv": "913c018d63899185bc95f66a3bf35ce60b928aaae135a231b9c0eba9fb3fa10e",
+    "mu_anchor_daily.csv": "67ff10cc31f93013bec46b070cea8d0660207cdae852efd4430fbc88bf1d6bd9",
+    "pedigree_residual_history.csv.gz": "6ec103d966111ca559737351664376ee52e192b8ddeaa6d2c69fe877b9f5d931",
+    "race_metrics.csv.gz": "0f41f98679ea669bc6c0c732b3991f4df5cf32451a029b7e6cabef981ea4f831",
+    "margin_multipliers.csv.gz": "ea169146cd29759953a06aed19a20b0741179e6dda45a49858b6ed469fea9405",
+    "result_events.csv": "f115298d869b9a4fbd7fed43d9dde380114539b5f502298b69d24f1d05c2cb03",
+    "propagation_events.csv.gz": "42e93849e15e0a91d2ce46246688f17092e81e5b3ee7e10e8f2403d5154decd6",
+    "interaction_history_latest.csv.gz": "b0bbb8a9ae7fbb50b6b13be9a14cd295a5af369e9d2dd750cc6f548707a2f378",
+    "pair_covariance_latest.csv.gz": "8a175539f0fb6d66ef85695940fc7458f083cc2481f80aa074153a37b6b39cff",
+    "covariance_diagnostics.csv.gz": "d9b03eb3b062afc0ec185f3f2500fc55270b71c6cbff8b15071c7e996a54752b",
+    "validation_overall.csv": "6aa47aed4b13c81afca367f53eebb40e464aa74fe96d4346ec0c25776a0b4b0a",
+    "validation_by_year.csv": "75cd78a160d3c70981443a07e34bb8c3012448d893d5d8b3a61d54a4bab9dc0e",
+    "validation_by_grade.csv": "b58e5bfa3582e877fcb076ec1fa4f0598e760626f9605f006800dfee5fb786e7",
+    "validation_propagation_layers.csv": "dae3c228cdb151b5813768c17e86646cc5fcb3ad27553bb56ec38b35780210a9",
+    "judgment.json": "4c1c0cdc1c762f2f4c06ce7228d4cb6b067a9eeed3a3b5d486e286c9f6425d81"
+  }
+}

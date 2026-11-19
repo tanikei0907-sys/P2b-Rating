@@ -1,33 +1,33 @@
 {
   "snapshots": {
-    "path": "p4_margin/snapshots.csv.gz",
-    "size": 58138414,
-    "sha256": "2bb2be134046733d2d018272e9c21aadae40eb616dc7ba4a5cd9d48163d33c15"
+    "path": "p7_propagation/snapshots.csv.gz",
+    "size": 97844471,
+    "sha256": "8842eaa7d3098feaa4d24b88e27c012dcd183f7de03fab15125fd700f9db1238"
   },
   "posts": {
-    "path": "p4_margin/post_updates.csv.gz",
-    "size": 12685181,
-    "sha256": "b442f2e7ee9303e102fc277c15fb09689ce436e0b13fa08d0dab2bfbb5a5fd8c"
+    "path": "p7_propagation/post_updates.csv.gz",
+    "size": 12533335,
+    "sha256": "3a2d5eb115b1a89bd53cc528dfd485f8b95646c8606f3fdbe8cf92fe00d10a57"
   },
   "anchor": {
-    "path": "p4_margin/mu_anchor_daily.csv",
-    "size": 256927,
-    "sha256": "d51692127d5bc91126554fd4137a9ce97b4791441faf101bcc3963554ce8a038"
+    "path": "p7_propagation/mu_anchor_daily.csv",
+    "size": 254970,
+    "sha256": "67ff10cc31f93013bec46b070cea8d0660207cdae852efd4430fbc88bf1d6bd9"
   },
   "forward_snapshots": {
-    "path": "p4_forward/snapshots_2025plus.csv.gz",
-    "size": 10878402,
-    "sha256": "baf65de7ce70776afbbbf9be79bf3d1578e1ea41a1ce47f0c16f67924abc9d6f"
+    "path": "p7_forward/snapshots_2025plus.csv.gz",
+    "size": 22377268,
+    "sha256": "6139c6c774882f4ae6f400afc515da86e4771f8eacfead5f81ce6bd75edfaf50"
   },
   "forward_posts": {
-    "path": "p4_forward/post_updates_2025plus.csv.gz",
-    "size": 2310218,
-    "sha256": "e2bef52cfa00c5a83bf3a4b6a87805f7d0990c84af4e83b031e5e4adefe42a69"
+    "path": "p7_forward/post_updates_2025plus.csv.gz",
+    "size": 2287326,
+    "sha256": "f42fb5a8b55df6a68190d4ecbe2324d890cfbb8c5bc23450ce24ffbf4d916d10"
   },
   "forward_anchor": {
-    "path": "p4_forward/mu_anchor_daily_2025plus.csv",
-    "size": 28601,
-    "sha256": "63b397249b45edfe18ebf8ddc1d9dba4aee3ae36f22a763053c73cb621fcc039"
+    "path": "p7_forward/mu_anchor_daily_2025plus.csv",
+    "size": 55428,
+    "sha256": "0c82a593a9478783536dc81351ce4971a165dd0dbc0380d7d5f397950859e3ed"
   },
   "p0_snapshots": {
     "path": "stage2_output/snapshots.csv.gz",
@@ -50,34 +50,34 @@
     "sha256": "100ca7aa09ef17c23f265f6bfe342a8f75c30f18144b3ac3a698089067553548"
   },
   "residual_history": {
-    "path": "p4_margin/pedigree_residual_history.csv.gz",
-    "size": 5004484,
-    "sha256": "0139db90f60d6d25649019059e370e9a6641e227db591850f6d02fb10a87deab"
+    "path": "p7_propagation/pedigree_residual_history.csv.gz",
+    "size": 5005163,
+    "sha256": "6ec103d966111ca559737351664376ee52e192b8ddeaa6d2c69fe877b9f5d931"
   },
   "forward_residual": {
-    "path": "p4_forward/pedigree_residual_history_2025plus.csv.gz",
-    "size": 894932,
-    "sha256": "ba618f379f9f2f82dd7a2f767feda37120c10e8fa9964cb9efeb6f4cd4cdf463"
+    "path": "p7_forward/pedigree_residual_history_2025plus.csv.gz",
+    "size": 895052,
+    "sha256": "133ef0eb45191f8340545015db8d319debcb3afe212b4996d0535753835c0883"
   },
-  "p4_config": {
-    "path": "p4_margin/selected_config.json",
-    "size": 5031,
-    "sha256": "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1"
+  "p7_config": {
+    "path": "p7_propagation/selected_config.json",
+    "size": 1969,
+    "sha256": "3246e20ccee1102638213235d6b9e6f373079de6165fda16ddc3ae76d4b9e174"
   },
   "viewer_config": {
     "path": "viewer_config.yaml",
     "size": 571,
-    "sha256": "587abb05eda33b7d75105ad4ab8af69d478f1406ea4225afb039788843599606"
+    "sha256": "6bd0b5f510d162ffafceddbffb967d0d4532f8289fed463d501d6e3eafe60e27"
   },
   "viewer_data": {
     "path": "viewer_data.py",
-    "size": 16775,
-    "sha256": "ad907efc7cf2fa9788f93b9c1800cc6f402e68d422420409492b09f6439d28c9"
+    "size": 17201,
+    "sha256": "0f0dd6ce2ba25ba0394f4bedf0d6a0321990e526ad25f5ba571663d567af1204"
   },
   "viewer_app": {
     "path": "rating_viewer.py",
-    "size": 13703,
-    "sha256": "6c4ae80c4a1f65be8bf428ed4a9c82cb394f4f3731d7d441ae346e6342e4307f"
+    "size": 14203,
+    "sha256": "ed21e717b4a6d9eb68f96fb60eca1bf61335b2cf0af6c7f818586c5caf62923b"
   },
   "predict_snapshots": []
 }

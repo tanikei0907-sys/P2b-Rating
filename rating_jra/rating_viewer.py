@@ -7,9 +7,9 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from viewer_data import EXPECTED_P4_HASH, SCALE, load_viewer_config, load_viewer_data
+from viewer_data import EXPECTED_P7_HASH, SCALE, load_viewer_config, load_viewer_data
 
-st.set_page_config(page_title="P4 JRAレーティング ビューワー", layout="wide")
+st.set_page_config(page_title="P7 JRAレーティング ビューワー", layout="wide")
 
 
 GRADE_LABELS = {
@@ -94,12 +94,14 @@ def race_view(data: pd.DataFrame) -> None:
     race["rating_rank"] = race["elo_pre"].rank(method="min", ascending=False).astype(int)
     race = race.sort_values(["elo_pre", "horse_id"], ascending=[False, True])
     columns = [
-        "rating_rank", "horse_name", "elo_pre", "elo_sd", "elo_prior_boost", "official_finish",
-        "elo_post", "elo_delta", "mu_pre", "var_pre_eff", "n_graph_starts", "days_since_start",
+        "rating_rank", "horse_name", "surface", "elo_pre", "elo_base_pre", "elo_surface_adjustment",
+        "elo_sd", "elo_prior_boost", "official_finish", "elo_post", "elo_delta",
+        "mu_pre", "var_pre_eff", "n_graph_starts", "days_since_start",
     ]
     display = race[columns].rename(columns={
-        "rating_rank": "順位", "horse_name": "馬名", "elo_pre": "発走前Elo", "elo_sd": "±SD",
-        "elo_prior_boost": "事前補正", "official_finish": "確定着順", "elo_post": "更新後Elo",
+        "rating_rank": "順位", "horse_name": "馬名", "surface": "馬場", "elo_pre": "発走前Elo",
+        "elo_base_pre": "基礎体力Elo", "elo_surface_adjustment": "馬場適性補正Elo", "elo_sd": "±SD",
+        "elo_prior_boost": "P0比", "official_finish": "確定着順", "elo_post": "更新後Elo",
         "elo_delta": "変動幅", "mu_pre": "生mu_pre", "var_pre_eff": "有効分散",
         "n_graph_starts": "累積出走数", "days_since_start": "休養日数",
     })
@@ -110,9 +112,12 @@ def race_view(data: pd.DataFrame) -> None:
         y=chart["horse_name"],
         orientation="h",
         error_x=dict(type="data", symmetric=False, array=chart["elo_sd"], arrayminus=chart["elo_sd"]),
-        marker=dict(color=chart["elo_prior_boost"], colorscale="Viridis", colorbar=dict(title="事前補正")),
-        customdata=np.stack([chart["elo_prior_boost"], chart["official_finish"], chart["elo_post"], chart["elo_delta"]], axis=-1),
-        hovertemplate="%{y}<br>発走前Elo: %{x:.3f}<br>事前補正: %{customdata[0]:.3f}<br>着順: %{customdata[1]}<br>更新後Elo: %{customdata[2]:.3f}<br>変動幅: %{customdata[3]:.3f}<extra></extra>",
+        marker=dict(color=chart["elo_prior_boost"], colorscale="Viridis", colorbar=dict(title="P0比")),
+        customdata=np.stack([
+            chart["elo_prior_boost"], chart["official_finish"], chart["elo_post"], chart["elo_delta"],
+            chart["elo_base_pre"], chart["elo_surface_adjustment"],
+        ], axis=-1),
+        hovertemplate="%{y}<br>発走前Elo: %{x:.3f}<br>基礎体力Elo: %{customdata[4]:.3f}<br>馬場適性補正: %{customdata[5]:.3f}<br>P0比: %{customdata[0]:.3f}<br>着順: %{customdata[1]}<br>更新後Elo: %{customdata[2]:.3f}<br>変動幅: %{customdata[3]:.3f}<extra></extra>",
     ))
     fig.update_layout(height=max(400, 28 * len(chart) + 180), yaxis_title="馬名", xaxis_title="発走前 Elo風レーティング ±1 SD")
     st.plotly_chart(fig, width="stretch")
@@ -163,14 +168,16 @@ def career_view(data: pd.DataFrame) -> None:
     fig.update_layout(height=520, xaxis_title="開催日", yaxis_title="Elo風レーティング ±1 SD", hovermode="closest")
     st.plotly_chart(fig, width="stretch")
     columns = [
-        "race_date", "venue_name", "race_name", "official_finish", "elo_pre", "elo_post", "elo_delta",
-        "elo_sd", "elo_prior_boost", "n_graph_starts", "days_since_start", "condition_name", "distance",
+        "race_date", "venue_name", "race_name", "surface", "official_finish", "elo_pre", "elo_base_pre",
+        "elo_surface_adjustment", "elo_post", "elo_delta", "elo_sd", "elo_prior_boost",
+        "n_graph_starts", "days_since_start", "condition_name", "distance",
     ]
     display = career[columns].rename(columns={
-        "race_date": "開催日", "venue_name": "競馬場", "race_name": "レース名", "official_finish": "着順",
-        "elo_pre": "発走前Elo", "elo_post": "更新後Elo", "elo_delta": "変動幅", "elo_sd": "±SD",
-        "elo_prior_boost": "事前補正", "n_graph_starts": "累積出走数", "days_since_start": "休養日数",
-        "condition_name": "条件", "distance": "距離",
+        "race_date": "開催日", "venue_name": "競馬場", "race_name": "レース名", "surface": "馬場",
+        "official_finish": "着順", "elo_pre": "発走前Elo", "elo_base_pre": "基礎体力Elo",
+        "elo_surface_adjustment": "馬場適性補正Elo", "elo_post": "更新後Elo", "elo_delta": "変動幅",
+        "elo_sd": "±SD", "elo_prior_boost": "P0比", "n_graph_starts": "累積出走数",
+        "days_since_start": "休養日数", "condition_name": "条件", "distance": "距離",
     })
     st.dataframe(display, hide_index=True, width="stretch")
 
@@ -245,12 +252,12 @@ def pedigree_view(auxiliary: pd.DataFrame) -> None:
 
 
 def main() -> None:
-    st.title("P4 JRAレーティング ビューワー")
+    st.title("P7 JRAレーティング ビューワー")
     config = load_viewer_config()
     with st.spinner("2017年以降のデータを読み込み・キャッシュしています…"):
         data, auxiliary, fingerprint = load_viewer_data(config)
-    st.sidebar.markdown("**P4 config hash**")
-    st.sidebar.code(EXPECTED_P4_HASH)
+    st.sidebar.markdown("**P7 config hash**")
+    st.sidebar.code(EXPECTED_P7_HASH)
     st.sidebar.markdown(f"**件数**: {len(data):,} rows")
     st.sidebar.markdown(f"**最新開催日**: {data['race_date'].max().date()}")
     st.sidebar.markdown("**2017-01-01以降のみ表示**")

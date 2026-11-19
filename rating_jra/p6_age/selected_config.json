@@ -1,0 +1,46 @@
+{
+  "model": "P6",
+  "status": "FROZEN_BEFORE_P6_VALIDATION",
+  "alpha1": 0.1,
+  "alpha2": 0.05,
+  "alpha3": -0.15,
+  "age_segments": [
+    {
+      "range": "2～3.5歳",
+      "parameter": "alpha1",
+      "sign": ">=0"
+    },
+    {
+      "range": "3.5～5歳",
+      "parameter": "alpha2"
+    },
+    {
+      "range": "5歳以上",
+      "parameter": "alpha3",
+      "sign": "<=0"
+    }
+  ],
+  "use_surface": true,
+  "surface_parameters": {
+    "base_var_scale": 0.75,
+    "var_surf0": 1.5,
+    "q_surf": 0.03
+  },
+  "baseline_model": "P5",
+  "baseline_config_sha256": "8be98447219ac30ee2409eec4f18039c4666ea1a7a649b53556adbf4f5451b53",
+  "sex_correction": "なし。共通の年齢傾斜を使用",
+  "tuning_period": "2012-01-01/2020-12-31",
+  "tuning_nll": 2.338429058409451,
+  "tuning_races": 29936,
+  "control_nll": 2.3395042745461527,
+  "baseline_tuning_nll_same_period_F": 2.3395042745461874,
+  "candidate_count": 54,
+  "p4_config_sha256": "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1",
+  "p2b_config_sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9",
+  "input_db_sha256": "5fa993aadea87e8434797dc073ab03c1a14026e0b36be7174f682542f545c34a",
+  "age_sex_audit_sha256": "a65c2d7ca8679e9304679282d12050a54aa3d2712f3bf9d21194c8aa1351cc14",
+  "prior_policy": "P1・P2b係数と標準化定数を固定し、初期3走残差をP6のas-of軌道から逐次生成",
+  "evaluation_nll": "標準W_share PL-NLL。着差倍率と年齢ドリフトは更新のみ",
+  "selected_at_utc": "2026-11-19T18:57:12.012205+00:00",
+  "validation_period_untouched_during_selection": true
+}

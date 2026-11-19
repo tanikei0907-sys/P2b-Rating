@@ -1,0 +1,28 @@
+{
+  "status": "UPDATED",
+  "model": "P7",
+  "run_id": "20261119T230351Z_34e47f01",
+  "new_races": 6295,
+  "new_starts": 86995,
+  "first_race_date": "2025-01-05",
+  "last_race_date": "2026-11-15",
+  "state_horses": 76150,
+  "interaction_rows": 75978,
+  "new_propagation_events": 944811,
+  "config_sha256": "3246e20ccee1102638213235d6b9e6f373079de6165fda16ddc3ae76d4b9e174",
+  "input_db_sha256": "68d21ec99a16657d8b61207e83b0cadb38ae91ab9a75005ff3b9768ec568f305",
+  "backup": "C:\\BaoZ_AI\\keiba_ai_project_v3\\rating_jra\\p7_forward\\backups\\20261119T230351Z_34e47f01",
+  "output_hashes": {
+    "snapshots_2025plus.csv.gz": "6139c6c774882f4ae6f400afc515da86e4771f8eacfead5f81ce6bd75edfaf50",
+    "post_updates_2025plus.csv.gz": "f42fb5a8b55df6a68190d4ecbe2324d890cfbb8c5bc23450ce24ffbf4d916d10",
+    "state_latest.csv": "e3ed59f0bbb5269730d8016f913bcabef99fcb47a8a287f838ba5eade92c56b1",
+    "pedigree_residual_history_2025plus.csv.gz": "133ef0eb45191f8340545015db8d319debcb3afe212b4996d0535753835c0883",
+    "mu_anchor_daily_2025plus.csv": "0c82a593a9478783536dc81351ce4971a165dd0dbc0380d7d5f397950859e3ed",
+    "result_events_2025plus.csv": "21cb0cd16b6249f909d5a41f8d93a01efca4c83fac0b058be62860ba283629d8",
+    "propagation_events_2025plus.csv.gz": "58c6e406c369367e954e0bd4b8f25f77646f0620aedd4848108f3cbff356880f",
+    "interaction_history_latest.csv.gz": "efd3dce8a3b32e0de3e24148a0e7cced42d595d7f2c6abf0e1dd28c9900047ea",
+    "margins_2025plus.csv.gz": "2dea623d7e9564a976a70fa5a1a6d129046647232a3a4d7a71693626e2a02bba",
+    "margin_multipliers_2025plus.csv.gz": "0b04b7587f62bbb86c18a81c4b478efc3d9c6fb00576e8ded1dfe140b5807f8f"
+  },
+  "finished_at_utc": "2026-11-19T23:05:17.856573+00:00"
+}
