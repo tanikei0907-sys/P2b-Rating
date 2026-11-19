@@ -12,7 +12,7 @@ import pandas as pd
 from rating_core import file_sha256
 
 BASE_DIR = Path(__file__).resolve().parent
-EXPECTED_P2B_HASH = "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9"
+EXPECTED_P4_HASH = "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1"
 START_DATE = pd.Timestamp("2017-01-01")
 SCALE = 400 / np.log(10)
 
@@ -25,37 +25,37 @@ def resolve_path(value: str | Path) -> Path:
 def load_viewer_config(path: str | Path = "viewer_config.yaml") -> dict:
     config_path = resolve_path(path)
     config = json.loads(config_path.read_text(encoding="utf-8"))
-    model_path = BASE_DIR / "stage3_output/config_p2b.yaml"
+    model_path = BASE_DIR / "p4_margin/selected_config.json"
     actual = file_sha256(model_path)
-    if actual != EXPECTED_P2B_HASH:
-        raise ValueError(f"config_p2b.yamlのハッシュが一致しません: {actual}")
+    if actual != EXPECTED_P4_HASH:
+        raise ValueError(f"P4 selected_config.jsonのハッシュが一致しません: {actual}")
     return config
 
 
 def input_paths(config: dict) -> dict[str, Path]:
     return {
-        "snapshots": BASE_DIR / "stage3_output/p2b/snapshots.csv.gz",
-        "posts": BASE_DIR / "stage3_output/p2b/post_updates.csv.gz",
-        "anchor": BASE_DIR / "stage3_output/p2b/mu_anchor_daily.csv",
-        "forward_snapshots": BASE_DIR / "p2b_forward/snapshots_2025plus.csv.gz",
-        "forward_posts": BASE_DIR / "p2b_forward/post_updates_2025plus.csv.gz",
-        "forward_anchor": BASE_DIR / "p2b_forward/mu_anchor_daily_2025plus.csv",
+        "snapshots": BASE_DIR / "p4_margin/snapshots.csv.gz",
+        "posts": BASE_DIR / "p4_margin/post_updates.csv.gz",
+        "anchor": BASE_DIR / "p4_margin/mu_anchor_daily.csv",
+        "forward_snapshots": BASE_DIR / "p4_forward/snapshots_2025plus.csv.gz",
+        "forward_posts": BASE_DIR / "p4_forward/post_updates_2025plus.csv.gz",
+        "forward_anchor": BASE_DIR / "p4_forward/mu_anchor_daily_2025plus.csv",
         "p0_snapshots": BASE_DIR / "stage2_output/snapshots.csv.gz",
         "forward_p0_snapshots": BASE_DIR / "p2b_forward/p0_residual_snapshots_2025plus.csv.gz",
         "sire_auxiliary": BASE_DIR / "stage3_output/sire_auxiliary.csv",
         "bms_auxiliary": BASE_DIR / "stage3_output/bms_auxiliary.csv",
-        "residual_history": BASE_DIR / "stage3_output/pedigree_residual_history.csv.gz",
-        "forward_residual": BASE_DIR / "p2b_forward/pedigree_residual_history_2025plus.csv.gz",
+        "residual_history": BASE_DIR / "p4_margin/pedigree_residual_history.csv.gz",
+        "forward_residual": BASE_DIR / "p4_forward/pedigree_residual_history_2025plus.csv.gz",
     }
 
 
 def source_fingerprint(config: dict) -> dict:
     paths = input_paths(config)
-    paths["p2b_config"] = BASE_DIR / "stage3_output/config_p2b.yaml"
+    paths["p4_config"] = BASE_DIR / "p4_margin/selected_config.json"
     paths["viewer_config"] = resolve_path("viewer_config.yaml")
     paths["viewer_data"] = Path(__file__)
     paths["viewer_app"] = BASE_DIR / "rating_viewer.py"
-    paths["predict_snapshots"] = sorted((BASE_DIR / "p2b_forward").glob("predict_snapshots_*.csv"))
+    paths["predict_snapshots"] = sorted((BASE_DIR / "p4_forward").glob("predict_snapshots_*.csv"))
     records = {}
     for key, value in paths.items():
         if isinstance(value, list):
@@ -162,7 +162,7 @@ def load_master(config: dict) -> dict[str, pd.DataFrame]:
     linked = config["database"].get("linked_tables", {})
     predict_dates = sorted({
         pd.to_datetime(path.stem.rsplit("_", 1)[-1], format="%Y%m%d").strftime("%Y-%m-%d")
-        for path in (BASE_DIR / "p2b_forward").glob("predict_snapshots_*.csv")
+        for path in (BASE_DIR / "p4_forward").glob("predict_snapshots_*.csv")
     })
     predict_clause = ""
     if predict_dates:
@@ -248,7 +248,7 @@ def load_auxiliary(master: dict[str, pd.DataFrame]) -> pd.DataFrame:
     from rating_pedigree import pedigree_auxiliary
     residual_paths = [
         BASE_DIR / "stage3_output/pedigree_residual_history.csv.gz",
-        BASE_DIR / "p2b_forward/pedigree_residual_history_2025plus.csv.gz",
+        BASE_DIR / "p4_forward/pedigree_residual_history_2025plus.csv.gz",
     ]
     residuals = []
     for path in residual_paths:
@@ -294,7 +294,7 @@ def build_cache(config: dict) -> tuple[pd.DataFrame, pd.DataFrame]:
     merged["record_type"] = merged["record_type"].fillna("final")
     merged = merged.sort_values(["race_id", "horse_id", "record_type", "race_date"], kind="stable")
     merged = merged.drop_duplicates(["race_id", "horse_id", "record_type"], keep="last").reset_index(drop=True)
-    predict_dir = BASE_DIR / "p2b_forward"
+    predict_dir = BASE_DIR / "p4_forward"
     predictions = []
     for path in sorted(predict_dir.glob("predict_snapshots_*.csv")):
         predictions.append(read_snapshot(path, "predict"))

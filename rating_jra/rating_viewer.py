@@ -7,9 +7,9 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from viewer_data import EXPECTED_P2B_HASH, SCALE, load_viewer_config, load_viewer_data
+from viewer_data import EXPECTED_P4_HASH, SCALE, load_viewer_config, load_viewer_data
 
-st.set_page_config(page_title="P2b JRAレーティング ビューワー", layout="wide")
+st.set_page_config(page_title="P4 JRAレーティング ビューワー", layout="wide")
 
 
 GRADE_LABELS = {
@@ -245,12 +245,12 @@ def pedigree_view(auxiliary: pd.DataFrame) -> None:
 
 
 def main() -> None:
-    st.title("P2b JRAレーティング ビューワー")
+    st.title("P4 JRAレーティング ビューワー")
     config = load_viewer_config()
     with st.spinner("2017年以降のデータを読み込み・キャッシュしています…"):
         data, auxiliary, fingerprint = load_viewer_data(config)
-    st.sidebar.markdown("**P2b config hash**")
-    st.sidebar.code(EXPECTED_P2B_HASH)
+    st.sidebar.markdown("**P4 config hash**")
+    st.sidebar.code(EXPECTED_P4_HASH)
     st.sidebar.markdown(f"**件数**: {len(data):,} rows")
     st.sidebar.markdown(f"**最新開催日**: {data['race_date'].max().date()}")
     st.sidebar.markdown("**2017-01-01以降のみ表示**")

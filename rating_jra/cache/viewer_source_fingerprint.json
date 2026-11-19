@@ -1,33 +1,33 @@
 {
   "snapshots": {
-    "path": "stage3_output/p2b/snapshots.csv.gz",
-    "size": 53848923,
-    "sha256": "e932ea0aba893ec4c070780be8424ceeefb83dd1d1358c8c2d872a57ca2f171b"
+    "path": "p4_margin/snapshots.csv.gz",
+    "size": 58138414,
+    "sha256": "2bb2be134046733d2d018272e9c21aadae40eb616dc7ba4a5cd9d48163d33c15"
   },
   "posts": {
-    "path": "stage3_output/p2b/post_updates.csv.gz",
-    "size": 12673299,
-    "sha256": "fcb17263d758f9f3518b5617e78246f18edc14254726f407efbaf78e4290d03b"
+    "path": "p4_margin/post_updates.csv.gz",
+    "size": 12685181,
+    "sha256": "b442f2e7ee9303e102fc277c15fb09689ce436e0b13fa08d0dab2bfbb5a5fd8c"
   },
   "anchor": {
-    "path": "stage3_output/p2b/mu_anchor_daily.csv",
-    "size": 166430,
-    "sha256": "d379da8421e59a7d07e748657f7dbb43fa950123b488a85bc37dd23895f9c637"
+    "path": "p4_margin/mu_anchor_daily.csv",
+    "size": 256927,
+    "sha256": "d51692127d5bc91126554fd4137a9ce97b4791441faf101bcc3963554ce8a038"
   },
   "forward_snapshots": {
-    "path": "p2b_forward/snapshots_2025plus.csv.gz",
-    "size": 10721314,
-    "sha256": "aec81988f809ee9bfbc69b327a590c5d7a7efeeaa0512e3d3dcfe9ce0e1ee1f9"
+    "path": "p4_forward/snapshots_2025plus.csv.gz",
+    "size": 10878402,
+    "sha256": "baf65de7ce70776afbbbf9be79bf3d1578e1ea41a1ce47f0c16f67924abc9d6f"
   },
   "forward_posts": {
-    "path": "p2b_forward/post_updates_2025plus.csv.gz",
-    "size": 2308165,
-    "sha256": "b0b2e04803095474c344adaa81a58eaed3a12575a47713acbe1c19539bae3f32"
+    "path": "p4_forward/post_updates_2025plus.csv.gz",
+    "size": 2310218,
+    "sha256": "e2bef52cfa00c5a83bf3a4b6a87805f7d0990c84af4e83b031e5e4adefe42a69"
   },
   "forward_anchor": {
-    "path": "p2b_forward/mu_anchor_daily_2025plus.csv",
-    "size": 28672,
-    "sha256": "3a74a42d8ceb67771bd5b59279aa443194b4bb2767de33d5b5b9f4de33ee16b6"
+    "path": "p4_forward/mu_anchor_daily_2025plus.csv",
+    "size": 28601,
+    "sha256": "63b397249b45edfe18ebf8ddc1d9dba4aee3ae36f22a763053c73cb621fcc039"
   },
   "p0_snapshots": {
     "path": "stage2_output/snapshots.csv.gz",
@@ -50,34 +50,34 @@
     "sha256": "100ca7aa09ef17c23f265f6bfe342a8f75c30f18144b3ac3a698089067553548"
   },
   "residual_history": {
-    "path": "stage3_output/pedigree_residual_history.csv.gz",
-    "size": 3705921,
-    "sha256": "9859b6cd4a8c0ce7e5c82f6063abce594427452709c3a0945e956449e99a50d9"
+    "path": "p4_margin/pedigree_residual_history.csv.gz",
+    "size": 5004484,
+    "sha256": "0139db90f60d6d25649019059e370e9a6641e227db591850f6d02fb10a87deab"
   },
   "forward_residual": {
-    "path": "p2b_forward/pedigree_residual_history_2025plus.csv.gz",
-    "size": 661707,
-    "sha256": "1cc94abac0edc2e42fbdbf9915ee832d7902f6a01d69f9bd3825bfb58fd04251"
+    "path": "p4_forward/pedigree_residual_history_2025plus.csv.gz",
+    "size": 894932,
+    "sha256": "ba618f379f9f2f82dd7a2f767feda37120c10e8fa9964cb9efeb6f4cd4cdf463"
   },
-  "p2b_config": {
-    "path": "stage3_output/config_p2b.yaml",
-    "size": 5711,
-    "sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9"
+  "p4_config": {
+    "path": "p4_margin/selected_config.json",
+    "size": 5031,
+    "sha256": "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1"
   },
   "viewer_config": {
     "path": "viewer_config.yaml",
-    "size": 572,
-    "sha256": "305135481a7c7900e2d398d9615322f8b1e1a383aa93cf22f48ba17ac48930a5"
+    "size": 571,
+    "sha256": "587abb05eda33b7d75105ad4ab8af69d478f1406ea4225afb039788843599606"
   },
   "viewer_data": {
     "path": "viewer_data.py",
-    "size": 16804,
-    "sha256": "9cb3fee1fa595afe042f0f68bf580649b0692422da174283ae68a11faa4b065d"
+    "size": 16775,
+    "sha256": "ad907efc7cf2fa9788f93b9c1800cc6f402e68d422420409492b09f6439d28c9"
   },
   "viewer_app": {
     "path": "rating_viewer.py",
-    "size": 13708,
-    "sha256": "dd7f6552e78fd94ba16eb6292f5d1d7475c3db67a3613ff8700625eab0967225"
+    "size": 13703,
+    "sha256": "6c4ae80c4a1f65be8bf428ed4a9c82cb394f4f3731d7d441ae346e6342e4307f"
   },
   "predict_snapshots": []
 }

@@ -1,0 +1,21 @@
+{
+  "status": "UPDATED",
+  "run_id": "20261119T133727Z_c7958c83",
+  "new_races": 6295,
+  "first_race_date": "2025-01-05",
+  "last_race_date": "2026-11-15",
+  "config_sha256": "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1",
+  "input_db_sha256": "28dfe7111ce290379990b4c62a71ff9863df0fbe8f2bb88ccb11461f74483ab1",
+  "backup": "C:\\BaoZ_AI\\keiba_ai_project_v3\\rating_jra\\p4_forward\\backups\\20261119T133727Z_c7958c83",
+  "output_hashes": {
+    "snapshots_2025plus.csv.gz": "baf65de7ce70776afbbbf9be79bf3d1578e1ea41a1ce47f0c16f67924abc9d6f",
+    "post_updates_2025plus.csv.gz": "e2bef52cfa00c5a83bf3a4b6a87805f7d0990c84af4e83b031e5e4adefe42a69",
+    "state_latest.csv": "34039c6b270abed3908e8e4da6bf5b1f5f1784bc51d2ca3ca2e286ab8a3a5924",
+    "pedigree_residual_history_2025plus.csv.gz": "ba618f379f9f2f82dd7a2f767feda37120c10e8fa9964cb9efeb6f4cd4cdf463",
+    "mu_anchor_daily_2025plus.csv": "63b397249b45edfe18ebf8ddc1d9dba4aee3ae36f22a763053c73cb621fcc039",
+    "result_events_2025plus.csv": "293d12351f21e4afaab11325b7d8c83b72e3b780876465f046457ad822e6d0eb",
+    "margins_2025plus.csv.gz": "2c3cddd5bf5c791ada0931a0810f794aee25ca0beb3a90e1f5daa04af0d9809d",
+    "margin_multipliers_2025plus.csv.gz": "44861f4b56a5cb52292f5074aa6e3595bb81bdfe61748824c17c1bf22c3ae54b"
+  },
+  "finished_at_utc": "2026-11-19T13:38:12.065759+00:00"
+}

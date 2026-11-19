@@ -9,21 +9,19 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SYNC_PATHS = [
-    "rating_jra/stage3_output/p2b/snapshots.csv.gz",
-    "rating_jra/stage3_output/p2b/post_updates.csv.gz",
-    "rating_jra/stage3_output/p2b/mu_anchor_daily.csv",
-    "rating_jra/p2b_forward/snapshots_2025plus.csv.gz",
-    "rating_jra/p2b_forward/post_updates_2025plus.csv.gz",
-    "rating_jra/p2b_forward/state_latest.csv",
-    "rating_jra/p2b_forward/pedigree_residual_history_2025plus.csv.gz",
-    "rating_jra/p2b_forward/mu_anchor_daily_2025plus.csv",
-    "rating_jra/p2b_forward/result_events_2025plus.csv",
-    "rating_jra/p2b_forward/state_p0_residual_latest.csv",
-    "rating_jra/p2b_forward/p0_residual_snapshots_2025plus.csv.gz",
+    "rating_jra/p4_forward/snapshots_2025plus.csv.gz",
+    "rating_jra/p4_forward/post_updates_2025plus.csv.gz",
+    "rating_jra/p4_forward/state_latest.csv",
+    "rating_jra/p4_forward/pedigree_residual_history_2025plus.csv.gz",
+    "rating_jra/p4_forward/mu_anchor_daily_2025plus.csv",
+    "rating_jra/p4_forward/result_events_2025plus.csv",
+    "rating_jra/p4_forward/margins_2025plus.csv.gz",
+    "rating_jra/p4_forward/margin_multipliers_2025plus.csv.gz",
+    "rating_jra/p4_forward/latest_run_manifest.json",
     "rating_jra/cache/viewer_merged_2017plus.parquet",
     "rating_jra/cache/viewer_auxiliary.parquet",
     "rating_jra/cache/viewer_source_fingerprint.json",
-    ":(glob)rating_jra/p2b_forward/predict_snapshots_*.csv",
+    ":(glob)rating_jra/p4_forward/predict_snapshots_*.csv",
 ]
 
 
@@ -44,7 +42,7 @@ def sync_github(root: Path = PROJECT_ROOT, push: bool = True, refresh_cache: boo
     root = root.resolve()
     if run_git(root, "rev-parse", "--is-inside-work-tree").stdout.strip() != "true":
         raise RuntimeError("Gitリポジトリではありません")
-    lock_path = root / ".git/p2b-rating-sync.lock"
+    lock_path = root / ".git/p4-rating-sync.lock"
     try:
         descriptor = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
     except FileExistsError as error:
@@ -56,15 +54,15 @@ def sync_github(root: Path = PROJECT_ROOT, push: bool = True, refresh_cache: boo
             from viewer_data import load_viewer_config, load_viewer_data
             load_viewer_data(load_viewer_config(root / "rating_jra/viewer_config.yaml"))
         paths = [path for path in SYNC_PATHS if not path.startswith(":(glob)") and (root / path).exists()]
-        if list(root.glob("rating_jra/p2b_forward/predict_snapshots_*.csv")):
-            paths.append(":(glob)rating_jra/p2b_forward/predict_snapshots_*.csv")
+        if list(root.glob("rating_jra/p4_forward/predict_snapshots_*.csv")):
+            paths.append(":(glob)rating_jra/p4_forward/predict_snapshots_*.csv")
         if not paths:
             raise RuntimeError("同期対象の出力ファイルがありません")
         run_git(root, "add", "--", *paths)
         changed = run_git(root, "diff", "--cached", "--quiet", "--", *paths, check=False).returncode != 0
         commit = None
         if changed:
-            message = "Update P2b rating data: " + datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+            message = "Update P4 rating data: " + datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
             run_git(root, "commit", "-m", message, "--", *paths)
             commit = run_git(root, "rev-parse", "HEAD").stdout.strip()
         if push:
@@ -86,7 +84,7 @@ def sync_github(root: Path = PROJECT_ROOT, push: bool = True, refresh_cache: boo
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="P2bの出力とビューワーキャッシュをGitHubへ公開します")
+    parser = argparse.ArgumentParser(description="P4の出力とビューワーキャッシュをGitHubへ公開します")
     parser.add_argument("--no-push", action="store_true", help="ローカルcommitまで実行します")
     parser.add_argument("--no-cache-refresh", action="store_true", help="テスト用。キャッシュを再生成しません")
     args = parser.parse_args()

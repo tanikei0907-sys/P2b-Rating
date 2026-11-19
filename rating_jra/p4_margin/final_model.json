@@ -1,0 +1,18 @@
+{
+  "adopted_model": "P4",
+  "adopted_config_sha256": "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1",
+  "p4_research_output_hashes": {
+    "selected_config.json": "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1",
+    "margin_multipliers.csv.gz": "b72ae6d841ad67a2f037ef42679342ea60bbd7a224491f83b03ba76ab7237577",
+    "snapshots.csv.gz": "2bb2be134046733d2d018272e9c21aadae40eb616dc7ba4a5cd9d48163d33c15",
+    "post_updates.csv.gz": "b442f2e7ee9303e102fc277c15fb09689ce436e0b13fa08d0dab2bfbb5a5fd8c",
+    "state_2024-12-31.csv": "4550879a1c99080816582f64a4b5b4340520141691181a7af97f67230aa5b431",
+    "mu_anchor_daily.csv": "d51692127d5bc91126554fd4137a9ce97b4791441faf101bcc3963554ce8a038",
+    "pedigree_residual_history.csv.gz": "0139db90f60d6d25649019059e370e9a6641e227db591850f6d02fb10a87deab",
+    "race_metrics.csv.gz": "f2f4c8c15067732c39de87b17ec51eee504a903480a5eb25f5f15f19ae811d23",
+    "validation_overall.csv": "75763a0b9a9c23b571a146da969b6cbaf3c29f774de932729d94613005ed52ab",
+    "validation_by_year.csv": "1bc5fb45c8e1bd3c8b23d7c38ab185b1021187fc6f3b186834bd59b9d5238fc5",
+    "validation_by_grade.csv": "c20c738473eaf172d3d13fdec028883592d342f7943d35816527837b295ad0b6",
+    "judgment.json": "21ad7b77fa07a1a8b3b9656903e4187ca6fc0fe4ad7fb8ee19f54f0995f6bbb1"
+  }
+}

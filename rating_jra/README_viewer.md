@@ -1,115 +1,85 @@
-# P2b JRAレーティング ビューワー
+# P4 JRAレーティング ビューワー
 
-`rating_viewer.py`は、最終採用モデルP2bの出力を、ブラウザ上で閲覧・分析するローカル用アプリです。Python + Streamlit + Plotlyを使用します。
+`rating_viewer.py`は、最終採用モデルP4の出力をブラウザで閲覧・分析するアプリです。Python + Streamlit + Plotlyを使用します。
 
 ## 起動
 
-プロジェクト直下`C:\BaoZ_AI\keiba_ai_project_v3`で、次を実行します。
+プロジェクト直下で次を実行します。
 
 ```bat
+python -m pip install -r requirements.txt
 run_viewer.bat
 ```
 
-ブラウザで`http://127.0.0.1:8501`が開きます。終了するには、起動したコマンドウィンドウで`Ctrl+C`を押します。
+ブラウザで`http://127.0.0.1:8501`を開きます。終了するには起動ウィンドウで`Ctrl+C`を押します。初回または入力更新後はキャッシュ再生成に約1分かかることがあります。
 
-初回または入力ファイル更新後は、Parquetキャッシュの再生成に約1分かかることがあります。変更がない次回起動時は、キャッシュをそのまま読み込みます。
+## 設定とハッシュ
 
-## 必要パッケージ
-
-- Python 3.14
-- streamlit
-- plotly
-- pyarrow
-- numpy / pandas / pyodbc / numba
-
-導入する場合は、以下を実行します。
-
-```bash
-python -m pip install streamlit plotly pyarrow
-```
-
-## 設定
-
-`rating_jra/viewer_config.yaml`を編集します。
-
-- `database.path`：最新の馬王Z DB
-- `database.linked_tables`：出走馬・レース・馬・血統マスタのリンク先
-- `paths.output_dir`：2025年以降の出力ディレクトリ
-- `paths.cache_dir`：Parquetキャッシュの保存先
-
-起動時に`stage3_output/config_p2b.yaml`のSHA-256が、次の値と一致するか確認します。
+`viewer_config.yaml`でDB・リンク先・出力・キャッシュのディレクトリを指定します。起動時に`p4_margin/selected_config.json`のSHA-256を照合します。
 
 ```text
-3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9
+436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1
 ```
 
-不一致なら起動しません。P0・P1・P2bの凍結パラメータは変更しません。
+不一致なら起動しません。P1・P2bの事前分布、血統標準化定数、P4の着差更新パラメータは変更しません。
 
 ## キャッシュ
 
-`cache/viewer_merged_2017plus.parquet`と`cache/viewer_auxiliary.parquet`を使用します。入力CSV・アプリ・設定ファイルの内容ハッシュとサイズが変わった場合だけ再生成します。`cache/viewer_source_fingerprint.json`に判定情報を保存しています。パスやmtimeが違っても内容が同じならキャッシュを再利用できるため、GitHubからクローンした場合も同梱キャッシュを直接利用できます。
+`cache/viewer_merged_2017plus.parquet`、`viewer_auxiliary.parquet`、`viewer_source_fingerprint.json`を使用します。入力CSV・アプリ・設定の内容ハッシュとサイズが変わったときだけ再生成します。パスやmtimeが違っても内容が同じなら再利用するため、GitHubからのクローンでも同梱キャッシュを直接利用できます。
 
-元のCSV・MDBは全て読み取り専用です。DBは一時コピーし、リンク先もコピー内で付け替えてから接続します。一時ファイルとAccessの`.ldb`は削除します。
+P4データで再生成されたキャッシュであり、P2bキャッシュを結合・混用しません。DBは一時コピーして読み取り専用で接続し、一時ファイルとAccessの`.ldb`は削除します。
 
 ## タブ
 
 ### レース別
 
-開催日・競馬場・レースを選ぶと、出走馬の次を表示します。
+開催日・競馬場・レースを選び、レーティング順位、`elo_pre`、`±elo_sd`、事前補正、着順、`elo_post`・`elo_delta`を表示します。横棒グラフとエラーバーも表示します。
 
-レース選択欄には、レース名の前に年齢区分・クラス・グレードを表示します。`1勝クラス`=500万円条件、`2勝クラス`=1000万円条件、`3勝クラス`=1600万円条件です。グレードコードがある場合はGI・GII・GIII・J-GI等を優先します。名称が空のレースに「名称未設定」は表示しません。
-
-- Elo風レーティング順位
-- `elo_pre`、`±elo_sd`
-- 事前補正`elo_prior_boost`
-- 確定着順
-- `elo_post`・`elo_delta`
-
-横棒グラフとエラーバーを表示します。`predict_snapshots_*.csv`があるレースは、「発走前（未確定）」も選択できます。未確定の出馬表はデータ区分7の確定結果がなくてもDBから補完し、確定版が存在する場合は確定版を優先します。予測行では`elo_pre`・`elo_sd`を算出し、更新後の`elo_post`・`elo_delta`は空欄です。
+レース選択欄には年齢・クラス・グレードを表示し、名称が空のレースに「名称未設定」は表示しません。`p4_forward/predict_snapshots_*.csv`があるレースは「発走前（未確定）」を選択できます。未確定出馬表は確定結果がなくてもDBから補完し、確定版があれば確定版を優先します。予測行の`elo_post`・`elo_delta`は空欄です。
 
 ### 馬別推移
 
-馬名の部分一致または馬IDで1頭を選びます。2017年以降のElo推移と`±1 SD`の信頼帯、全戦績を表示します。カーソル位置には、開催日・レース名・着順・休養日数・前走からのElo変動幅を表示します。累積出走数はウォームアップ期間を含むスナップショットの値です。
+馬名の部分一致または馬IDから1頭を選び、2017年以降のElo推移、`±1 SD`、全戦績を表示します。開催日・レース名・着順・休養日数・Elo変動を確認できます。累積出走数はウォームアップ期間を含むスナップショットの値です。
 
 ### ランキング
 
-基準日から直近365日以内に出走した馬の最新Eloで、現役TOP100を表示します。芝・ダートと最小出走数を指定できます。基準日以降の結果を使わないよう、その日までの最新出走を各馬から選んでいます。
+指定日から直近365日以内に出走した馬の最新Eloで現役TOP100を表示します。芝・ダートと最小出走数を指定できます。指定日以降の結果は使いません。
 
 ### 血統評価
 
-種牡馬・母父別に以下を表示します。
-
-- 産駒数・集計走数
-- 新馬戦勝率・新馬戦3着内率
-- 3走以内勝ち上がり率
-- 勝ち・3着内の初期3走残差平均
-
-名称検索、最小産駒数、指標別の並べ替えができます。表示期間の制限を厳密に適用し、2017年以降の残差履歴から全指標を再集計します。2025年以降の`p2b_forward`残差も含め、2012～2016年のウォームアップ期間は集計から除外します。P2bの初期値へ使う凍結血統パラメータそのものは変更しません。2016年以前に新馬戦を終えた馬については、2017年以降のデータだけでは新馬戦勝率・3着内率を算出できないため、ゼロではなく空欄で表示します。
+種牡馬・母父別の産駒数、新馬戦勝率・3着内率、3走以内勝ち上がり率、初期3走残差を検索・並べ替えできます。2017年以降のP4残差だけを使用し、2012～2016年は集計から除外します。2016年以前に新馬戦を終えた馬の新馬戦勝率は算出不可として空欄にします。
 
 ## Elo風表示
-
-`SCALE = 400 / ln(10)`を使用します。
 
 ```text
 elo_pre  = 1500 + SCALE × (mu_pre  - mu_bar_D)
 elo_post = 1500 + SCALE × (mu_post - mu_bar_D)
 elo_delta = elo_post - elo_pre
 elo_sd   = SCALE × sqrt(var_pre_eff)
-elo_prior_boost = SCALE × (p2b_mu_pre - p0_mu_pre)
+elo_prior_boost = SCALE × (p4_mu_pre - p0_mu_pre)
+SCALE = 400 / ln(10)
 ```
 
-`elo_pre`が既に保存されている場合はその値を使い、未計算分は`mu_bar_D`から算出します。Eloは表示用換算で、PL更新そのものには使いません。`elo_prior_boost`の比較用P0は、2012～2024年の`stage2_output`と、2025年以降の`p0_residual_snapshots_2025plus.csv.gz`を使用します。
+Eloは表示用換算で、PL更新には使いません。P0との比較には、既存の読み取り専用P0スナップショットを使用します。
 
-## 期間とデータ
+## 期間と入力
 
-表示対象は`2017-01-01`以降だけです。2012～2016年のウォームアップ期間は、検索・一覧・グラフ・ランキングから除外しています。累積出走数だけは、スナップショットに保存された全期間の値をそのまま表示します。
+表示は2017-01-01以降に限定します。
 
-確定済みデータは、2017～2024年の`stage3_output/p2b/`と、2025年以降の`p2b_forward/`を縦結合し、`(race_id, horse_id, record_type)`で重複排除しています。確定レースと発走前レースは区別して選択できます。
+- 2017～2024年：`p4_margin/snapshots.csv.gz`、`post_updates.csv.gz`、`mu_anchor_daily.csv`
+- 2025年以降：`p4_forward/snapshots_2025plus.csv.gz`、`post_updates_2025plus.csv.gz`、`mu_anchor_daily_2025plus.csv`
+- 当日予想：`p4_forward/predict_snapshots_*.csv`
+
+確定・予測は`(race_id, horse_id, record_type)`で重複排除して区別します。
+
+## Streamlit Cloud
+
+リポジトリ`tanikei0907-sys/P2b-Rating`、ブランチ`main`、Main file path`rating_jra/rating_viewer.py`、Python 3.13を指定します。`requirements.txt`と`packages.txt`を使用し、Secrets・馬王Z DBは不要です。更新・予測ラッパーがP4データとキャッシュをpushするため、Cloudでも最新の公開データを閲覧できます。
 
 ## トラブル対応
 
-- `config_p2b.yamlのハッシュが一致しません`：凍結configを正しいファイルに戻し、ハッシュを確認してください。
-- DBが開けない・ロックされる：馬王Zを終了して再実行してください。一時MDBとリンク先をコピーして使用します。
-- キャッシュが古い：対象ファイルのmtimeまたはサイズを変更すると自動再生成されます。`cache/`内のParquetを削除しても再生成できます。
-- 馬名が見つからない：馬IDでも検索してください。マスタの馬名を優先して補完しています。
-- 起動確認：`viewer_server.log`を確認してください。HTTP `200 OK`の起動確認済みです。
+- P4 configハッシュ不一致：正しい`selected_config.json`を復元してください。
+- DBロック：馬王Zを終了して再実行してください。一時MDBとリンク先を使用します。
+- キャッシュが古い：入力の内容が変われば自動再生成されます。`cache/`内のParquetを削除しても再生成できます。
+- 馬名が見つからない：馬IDでも検索してください。馬名マスタで補完しています。
+- 起動確認：`viewer_server.log`とHTTP `200 OK`を確認してください。

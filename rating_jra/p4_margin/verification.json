@@ -1,0 +1,191 @@
+{
+  "status": "PASS",
+  "checks": {
+    "selected_config_hash": {
+      "pass": true,
+      "details": null
+    },
+    "p2b_config_hash": {
+      "pass": true,
+      "details": null
+    },
+    "time_audit_hash": {
+      "pass": true,
+      "details": null
+    },
+    "snapshot_shape": {
+      "pass": true,
+      "details": null
+    },
+    "snapshot_unique_keys": {
+      "pass": true,
+      "details": null
+    },
+    "snapshot_config_hash": {
+      "pass": true,
+      "details": null
+    },
+    "history_config_hash": {
+      "pass": true,
+      "details": null
+    },
+    "state_config_hash": {
+      "pass": true,
+      "details": null
+    },
+    "finite_state": {
+      "pass": true,
+      "details": null
+    },
+    "positive_variance": {
+      "pass": true,
+      "details": null
+    },
+    "ranked_time_complete": {
+      "pass": true,
+      "details": null
+    },
+    "time_unit_tenths": {
+      "pass": true,
+      "details": null
+    },
+    "relative_time_keys": {
+      "pass": true,
+      "details": null
+    },
+    "relative_finish_match": {
+      "pass": true,
+      "details": null
+    },
+    "stage_margins_recalculated": {
+      "pass": true,
+      "details": {
+        "max_error": 2.275957200481571e-14,
+        "status_mismatches": 0
+      }
+    },
+    "cumulative_margins_recalculated": {
+      "pass": true,
+      "details": {
+        "mismatch_rows": 0,
+        "max_error": 2.3092638912203256e-14
+      }
+    },
+    "nonnegative_stage_margins": {
+      "pass": true,
+      "details": null
+    },
+    "selected_multipliers_match": {
+      "pass": true,
+      "details": null
+    },
+    "independent_margin_update": {
+      "pass": true,
+      "details": {
+        "mismatch_races": 0,
+        "max_mu_error": 1.2165379814632615e-11,
+        "max_var_error": 1.0478284906412227e-11
+      }
+    },
+    "standard_pl_nll_unmodified": {
+      "pass": true,
+      "details": {
+        "max_error": 9.335199280258166e-12
+      }
+    },
+    "p4_initial_prior_formula": {
+      "pass": true,
+      "details": {
+        "max_error": 1.0790479620936821e-11
+      }
+    },
+    "sire_asof_count": {
+      "pass": true,
+      "details": null
+    },
+    "sire_asof_status": {
+      "pass": true,
+      "details": null
+    },
+    "bms_asof_count": {
+      "pass": true,
+      "details": null
+    },
+    "bms_asof_status": {
+      "pass": true,
+      "details": null
+    },
+    "pedigree_features_asof_recalculation": {
+      "pass": true,
+      "details": {
+        "mismatch_values": 0,
+        "max_error": 7.155165349104209e-12
+      }
+    },
+    "residuals_recalculated_from_p4_scores": {
+      "pass": true,
+      "details": {
+        "max_error": 2.8315128020039992e-12
+      }
+    },
+    "graph_start_counts": {
+      "pass": true,
+      "details": null
+    },
+    "days_since_start": {
+      "pass": true,
+      "details": null
+    },
+    "persistent_mu_transition": {
+      "pass": true,
+      "details": null
+    },
+    "persistent_var_transition": {
+      "pass": true,
+      "details": null
+    },
+    "final_state_mu": {
+      "pass": true,
+      "details": null
+    },
+    "final_state_var": {
+      "pass": true,
+      "details": null
+    },
+    "final_state_starts": {
+      "pass": true,
+      "details": null
+    },
+    "final_state_last_start": {
+      "pass": true,
+      "details": null
+    },
+    "frozen_tuning_nll_reproduced": {
+      "pass": true,
+      "details": {
+        "expected": 2.3678387429341714,
+        "actual": 2.367838742934177
+      }
+    },
+    "protected_assets_unchanged": {
+      "pass": true,
+      "details": {
+        "status": "PASS",
+        "protected_files": 62,
+        "added": [],
+        "removed": [],
+        "changed": []
+      }
+    }
+  },
+  "metrics": {
+    "max_margin_error": 2.275957200481571e-14,
+    "max_update_mu_error": 1.2165379814632615e-11,
+    "max_update_var_error": 1.0478284906412227e-11,
+    "max_nll_error": 9.335199280258166e-12,
+    "max_pedigree_feature_error": 7.155165349104209e-12,
+    "max_residual_error": 2.8315128020039992e-12,
+    "tests_passed": 7
+  },
+  "issues": []
+}

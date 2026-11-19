@@ -13,7 +13,7 @@ class GithubSyncTest(unittest.TestCase):
         subprocess.run(["git", "init", "-b", "main", str(root)], check=True, capture_output=True)
         run_git(root, "config", "user.name", "P2b Test")
         run_git(root, "config", "user.email", "p2b-test@example.invalid")
-        output = root / "rating_jra/p2b_forward/snapshots_2025plus.csv.gz"
+        output = root / "rating_jra/p4_forward/snapshots_2025plus.csv.gz"
         output.parent.mkdir(parents=True)
         output.write_bytes(b"test-snapshot")
         cache = root / "rating_jra/cache/viewer_source_fingerprint.json"
@@ -32,7 +32,7 @@ class GithubSyncTest(unittest.TestCase):
             database = root / "rating_jra/stage2_input/BaoZ_2_snapshot.mdb"
             database.parent.mkdir()
             database.write_bytes(b"not-for-publication")
-            prediction = root / "rating_jra/p2b_forward/predict_snapshots_20261122.csv"
+            prediction = root / "rating_jra/p4_forward/predict_snapshots_20261122.csv"
             prediction.write_text("race_id,horse_id\n1,2\n", encoding="utf-8")
             third = sync_github(root, push=False, refresh_cache=False)
             self.assertEqual(third["status"], "COMMITTED_LOCALLY")

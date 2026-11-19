@@ -11,7 +11,7 @@
     }
   },
   "paths": {
-    "output_dir": "p2b_forward",
+    "output_dir": "p4_forward",
     "cache_dir": "cache"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "status": "P4_CANDIDATE_CONFIRMED",
+  "adopted_model": "P4",
+  "reason": "検証Fの標準PL-NLL改善が開催日クラスター95%CIで有意",
+  "primary": {
+    "pool": "F",
+    "year": "POOLED",
+    "n_races": 13316,
+    "starts": 183224,
+    "P2b_nll": 2.320421689130101,
+    "P4_nll": 2.310203994561834,
+    "delta_P4_minus_P2b": -0.010217694568267282,
+    "ci95_lower": -0.012209596355323265,
+    "ci95_upper": -0.008220373794772187,
+    "p_one_sided_improvement": 4.999750012499375e-05,
+    "bootstrap_repetitions": 20000,
+    "bootstrap_seed": 20261119
+  },
+  "p2b_config_sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9",
+  "p4_config_sha256": "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1",
+  "evaluation_protocol_sha256": "2d726098f2cdd818dce1885e2f441601c1d55eef783bf33b3b76515935e37c5a",
+  "validation_settings_changed_after_results": false
+}

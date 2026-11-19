@@ -1,0 +1,35 @@
+{
+  "model": {
+    "name": "P4",
+    "config_path": "p4_margin/selected_config.json",
+    "config_sha256": "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1",
+    "p2b_config_path": "stage3_output/config_p2b.yaml",
+    "p2b_config_sha256": "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9",
+    "frozen_state_path": "p4_margin/state_2024-12-31.csv",
+    "frozen_residual_history_path": "p4_margin/pedigree_residual_history.csv.gz",
+    "parameters_frozen": true
+  },
+  "database": {
+    "path": "C:\\BaoZ_AI\\DB\\BaoZ_2.mdb",
+    "copy_to_temp": true,
+    "read_only": true,
+    "linked_tables": {
+      "出走馬T": "C:\\BaoZ_AI\\DB\\BaoZ_2.ex.mdb",
+      "出走馬マスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb",
+      "レースマスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb",
+      "産駒マスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb",
+      "競走馬マスタ": "C:\\BaoZ_AI\\DB\\MasterDB\\BaoZ-RA.mdb"
+    }
+  },
+  "output": {
+    "directory": "p4_forward",
+    "backup_directory": "p4_forward/backups",
+    "temp_directory": "p4_forward/work"
+  },
+  "processing": {
+    "start_date": "2025-01-01",
+    "end_date": null,
+    "predict_date": null,
+    "final_result_data_division": 7
+  }
+}
