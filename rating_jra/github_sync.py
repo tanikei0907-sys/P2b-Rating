@@ -54,6 +54,7 @@ SYNC_PATHS = [
     "rating_jra/cache/viewer_auxiliary.parquet",
     "rating_jra/cache/viewer_source_fingerprint.json",
     ":(glob)rating_jra/p7_forward/predict_snapshots_*.csv",
+    ":(glob)rating_jra/p7_forward/p0_predict_snapshots_*.csv",
 ]
 
 
@@ -88,6 +89,8 @@ def sync_github(root: Path = PROJECT_ROOT, push: bool = True, refresh_cache: boo
         paths = [path for path in SYNC_PATHS if not path.startswith(":(glob)") and (root / path).exists()]
         if list(root.glob("rating_jra/p7_forward/predict_snapshots_*.csv")):
             paths.append(":(glob)rating_jra/p7_forward/predict_snapshots_*.csv")
+        if list(root.glob("rating_jra/p7_forward/p0_predict_snapshots_*.csv")):
+            paths.append(":(glob)rating_jra/p7_forward/p0_predict_snapshots_*.csv")
         if not paths:
             raise RuntimeError("同期対象の出力ファイルがありません")
         run_git(root, "add", "--", *paths)

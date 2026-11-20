@@ -73,6 +73,19 @@ class ViewerDataTest(unittest.TestCase):
         self.assertTrue(pd.isna(row["elo_delta"]))
         self.assertEqual(row["record_type"], "predict")
 
+    def test_p0_prediction_dates_are_datetime_for_parquet_merge(self):
+        from viewer_data import load_p0_prediction
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "p7_forward").mkdir()
+            pd.DataFrame([{
+                "race_id": 900001, "race_date": "2026-11-21", "horse_id": 2023000001, "mu_pre": 0.1,
+            }]).to_csv(root / "p7_forward/p0_predict_snapshots_20261121.csv", index=False)
+            with patch("viewer_data.BASE_DIR", root):
+                frame = load_p0_prediction()
+        self.assertTrue(pd.api.types.is_datetime64_any_dtype(frame["race_date"]))
+        self.assertAlmostEqual(frame.iloc[0]["p0_mu_pre"], 0.1)
+
     def test_master_prefers_final_and_retains_unconfirmed(self):
         snapshot = viewer_rows()[["race_id", "horse_id", "race_date", "record_type"]]
         confirmed = merge_master(snapshot, minimal_master(["1", "7"]))

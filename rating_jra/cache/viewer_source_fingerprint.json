@@ -71,8 +71,8 @@
   },
   "viewer_data": {
     "path": "viewer_data.py",
-    "size": 17201,
-    "sha256": "0f0dd6ce2ba25ba0394f4bedf0d6a0321990e526ad25f5ba571663d567af1204"
+    "size": 18170,
+    "sha256": "9a6a74274cc5eb832770c713f5e4d7d30678ad88dabe176393df37c34dae7185"
   },
   "viewer_app": {
     "path": "rating_viewer.py",
@@ -84,6 +84,13 @@
       "path": "p7_forward/predict_snapshots_20261121.csv",
       "size": 221928,
       "sha256": "d93772922a26aed057462e9ed491a02ea6f991949d1e4e56de868f2c8d025c57"
+    }
+  ],
+  "p0_predict_snapshots": [
+    {
+      "path": "p7_forward/p0_predict_snapshots_20261121.csv",
+      "size": 118204,
+      "sha256": "1b474ffe91a9f9c8c4d56efc95ea7bb2344221bfd494283754f1c719244c4b60"
     }
   ]
 }

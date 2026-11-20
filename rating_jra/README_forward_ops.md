@@ -54,6 +54,8 @@ run_predict_snapshot.bat --date 2026-11-22
 
 PowerShellでは`-Date 2026-11-22`を使用します。日付を省略すると、当日以降の最も近い開催日を選びます。出力は`p7_forward/predict_snapshots_<YYYYMMDD>.csv`です。
 
+同じ発走前状態を使うP0予測も`p7_forward/p0_predict_snapshots_<YYYYMMDD>.csv`に生成します。P0状態の確定日から当日までの確定結果をメモリ上で追いつき計算し、当日分はP0もドライランです。P0状態ファイルは保存・更新しません。
+
 このモードは発走前情報だけを生成し、`state_latest.csv`・対戦履歴・更新イベント・過去スナップショット・残差履歴を変更しません。更新後を示す列は出力しません。最新確定日以前への将来状態の適用は拒否します。
 
 ## 5. 出力

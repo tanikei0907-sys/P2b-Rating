@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from forward_ops import append_frame, copy_database, enrich_snapshots, filter_new_races, read_state, resolve_path, state_frame
+from forward_ops import append_frame, copy_database, enrich_snapshots, filter_new_races, read_state, resolve_path, run_continuation, state_frame
 from p4_forward_ops import build_margins, initialize_history, load_raw_with_times, pyodbc_connect
 from p4_margin.margins import multiplier_arrays
 from p7_forward_engine import P7ProductionEngine, interaction_history_frame
@@ -26,6 +26,7 @@ EXPECTED_P7_HASH = "3246e20ccee1102638213235d6b9e6f373079de6165fda16ddc3ae76d4b9
 EXPECTED_P6_HASH = "b433360ecf33afe503b3ca73cac8da57f2c0c3eab30462f538a4dab95867a730"
 EXPECTED_P4_HASH = "436f08ffb840a60ef33354fc28fa9434d0193a0460c73ba8c8f29d8038a26ba1"
 EXPECTED_P2B_HASH = "3577cbc7a6a2c3e58bfdeda6666b9aa9d7369866f4c6fa49902dac6b8779dbe9"
+EXPECTED_P0_HASH = "a06b15ef4e9affe345807b500a6b46fa769a6e1939ad0f309805d4a639a303c8"
 SCALE = 400 / np.log(10)
 OUTPUT_FILES = {
     "snapshots": "snapshots_2025plus.csv.gz",
@@ -55,7 +56,7 @@ def load_config(path: str | Path = "p7_forward/forward_config.yaml") -> dict:
     model = config["model"]
     if model["config_sha256"] != EXPECTED_P7_HASH:
         raise P7ForwardError("forward_configのP7ハッシュ固定値が不正です")
-    for key, expected in [("p7", EXPECTED_P7_HASH), ("p6", EXPECTED_P6_HASH), ("p4", EXPECTED_P4_HASH), ("p2b", EXPECTED_P2B_HASH)]:
+    for key, expected in [("p7", EXPECTED_P7_HASH), ("p6", EXPECTED_P6_HASH), ("p4", EXPECTED_P4_HASH), ("p2b", EXPECTED_P2B_HASH), ("p0", EXPECTED_P0_HASH)]:
         config_key = "config_path" if key == "p7" else f"{key}_config_path"
         if file_sha256(resolve_path(model[config_key])) != expected:
             raise P7ForwardError(f"{key.upper()} configのハッシュが不一致です")
@@ -70,6 +71,7 @@ def load_config(path: str | Path = "p7_forward/forward_config.yaml") -> dict:
     config["_p6"] = json.loads(resolve_path(model["p6_config_path"]).read_text(encoding="utf-8"))
     config["_p4"] = json.loads(resolve_path(model["p4_config_path"]).read_text(encoding="utf-8"))
     config["_p2b"] = json.loads(resolve_path(model["p2b_config_path"]).read_text(encoding="utf-8"))
+    config["_p0"] = json.loads(resolve_path(model["p0_config_path"]).read_text(encoding="utf-8"))
     if config["_p4"]["method"] != "A" or config["_p4"]["normalize"] or config["_p4"]["gamma"] != 2.0 or config["_p4"]["m_max"] != 2.0:
         raise P7ForwardError("P4着差倍率の凍結値が不正です")
     return config
@@ -380,6 +382,33 @@ def update(config: dict, end_date: str | None = None, raw_loader=load_raw_with_t
     return manifest
 
 
+def p0_prediction_frame(db: Path, raw_target: pd.DataFrame, target: str, source_hash: str, config: dict, raw_loader):
+    model = config["model"]
+    state = read_state(resolve_path(model["p0_state_path"]), EXPECTED_P0_HASH)
+    selected = P0Config(**config["_p0"]["p0"])
+    last_p0_date = pd.to_datetime(state["last_start_date"]).max()
+    target_date = pd.Timestamp(target)
+    if last_p0_date >= target_date:
+        raise P7ForwardError("P0状態が予測日以降です。P0状態の起点を確認してください")
+    confirmed_races = 0
+    if last_p0_date < target_date:
+        confirmed = raw_loader(db, (last_p0_date + pd.Timedelta(days=1)).strftime("%Y-%m-%d"), (target_date + pd.Timedelta(days=1)).strftime("%Y-%m-%d"), True)
+        confirmed = confirmed[confirmed["race_date"].lt(target_date)].copy()
+        if not confirmed.empty:
+            _, confirmed_result, confirmed_engine = run_continuation(
+                confirmed, source_hash, selected, state, None, None, "P0", EXPECTED_P0_HASH,
+            )
+            state = state_frame(confirmed_result, confirmed_engine, "P0", EXPECTED_P0_HASH)
+            confirmed_races = int(confirmed["race_id"].nunique())
+    _, result, engine = run_continuation(
+        raw_target, source_hash, selected, state, None, None, "P0", EXPECTED_P0_HASH, dry_run=True,
+    )
+    snapshots = enrich_snapshots(result, engine, "P0", EXPECTED_P0_HASH)
+    snapshots["source_db_sha256"] = source_hash
+    snapshots = snapshots.drop(columns=["mu_post", "var_post", "skip_mu_var_update"])
+    return snapshots, confirmed_races
+
+
 def predict_snapshot(config: dict, predict_date: str | None = None, raw_loader=load_raw_with_times) -> dict:
     out = resolve_path(config["output"]["directory"])
     out.mkdir(parents=True, exist_ok=True)
@@ -413,10 +442,18 @@ def predict_snapshot(config: dict, predict_date: str | None = None, raw_loader=l
             snapshots = snapshots.drop(columns=[
                 "mu_post", "var_post", "skip_mu_var_update", "mu_base_post", "surface_offset_post", "var_base_post", "var_surface_post",
             ])
-            output = out / f"predict_snapshots_{pd.Timestamp(target).strftime('%Y%m%d')}.csv"
+            p0_snapshots, p0_confirmed_races = p0_prediction_frame(db, raw, target, source_hash, config, raw_loader)
+            if set(snapshots["race_id"]) != set(p0_snapshots["race_id"]) or len(snapshots) != len(p0_snapshots):
+                raise P7ForwardError("P7とP0の予測対象が一致していません")
+            suffix = pd.Timestamp(target).strftime("%Y%m%d")
+            output = out / f"predict_snapshots_{suffix}.csv"
+            p0_output = out / f"p0_predict_snapshots_{suffix}.csv"
             temporary_output = output.with_suffix(".tmp")
+            temporary_p0_output = p0_output.with_suffix(".tmp")
             snapshots.to_csv(temporary_output, index=False, float_format="%.17g", date_format="%Y-%m-%d")
+            p0_snapshots.to_csv(temporary_p0_output, index=False, float_format="%.17g", date_format="%Y-%m-%d")
             os.replace(temporary_output, output)
+            os.replace(temporary_p0_output, p0_output)
         finally:
             import gc
             gc.collect()
@@ -424,5 +461,8 @@ def predict_snapshot(config: dict, predict_date: str | None = None, raw_loader=l
     return {
         "status": "PREDICT_SNAPSHOT_WRITTEN", "model": "P7", "race_date": target,
         "races": int(snapshots["race_id"].nunique()), "starts": len(snapshots),
-        "output": str(output), "config_sha256": EXPECTED_P7_HASH, "state_files_modified": False,
+        "output": str(output), "p0_output": str(p0_output),
+        "p0_confirmed_races_applied_in_memory": p0_confirmed_races,
+        "config_sha256": EXPECTED_P7_HASH, "p0_config_sha256": EXPECTED_P0_HASH,
+        "state_files_modified": False, "p0_state_files_modified": False,
     }

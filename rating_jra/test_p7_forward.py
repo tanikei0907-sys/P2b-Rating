@@ -26,6 +26,7 @@ def test_config(root: Path) -> dict:
     payload = json.loads((BASE / "p7_forward/forward_config.yaml").read_text(encoding="utf-8"))
     payload["database"]["path"] = str(BASE / "stage2_input/BaoZ_2_snapshot.mdb")
     payload["database"]["linked_tables"] = {"産駒マスタ": r"C:\BaoZ_AI\DB\MasterDB\BaoZ-RA.mdb"}
+    payload["model"]["p0_state_path"] = str(BASE / "stage2_output/state_2024-12-31.csv")
     payload["output"] = {
         "directory": str(root / "p7_forward"), "backup_directory": str(root / "backups"),
         "temp_directory": str(root / "work"),
@@ -83,6 +84,15 @@ class P7ForwardTest(unittest.TestCase):
             for row in predicted.itertuples():
                 current = state[state["horse_id"].eq(row.horse_id)].iloc[0]
                 self.assertEqual(row.n_graph_starts, current["n_graph_starts"])
+            p0_predicted = pd.read_csv(prediction["p0_output"])
+            self.assertEqual(len(p0_predicted), 4)
+            self.assertEqual(set(p0_predicted["race_id"]), set(predicted["race_id"]))
+            self.assertEqual(prediction["p0_confirmed_races_applied_in_memory"], 3)
+            self.assertFalse(prediction["p0_state_files_modified"])
+            self.assertTrue(p0_predicted["config_sha256"].eq(prediction["p0_config_sha256"]).all())
+            p0_expected = 1500 + 400 / np.log(10) * (p0_predicted["mu_pre"] - p0_predicted["mu_bar_D"])
+            np.testing.assert_allclose(p0_predicted["elo_pre"], p0_expected, atol=1e-12, rtol=0)
+            self.assertFalse({"mu_post", "var_post"} & set(p0_predicted.columns))
 
     def test_hash_rejected_before_output(self):
         with tempfile.TemporaryDirectory() as temporary:

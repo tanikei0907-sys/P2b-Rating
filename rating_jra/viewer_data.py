@@ -56,6 +56,7 @@ def source_fingerprint(config: dict) -> dict:
     paths["viewer_data"] = Path(__file__)
     paths["viewer_app"] = BASE_DIR / "rating_viewer.py"
     paths["predict_snapshots"] = sorted((BASE_DIR / "p7_forward").glob("predict_snapshots_*.csv"))
+    paths["p0_predict_snapshots"] = sorted((BASE_DIR / "p7_forward").glob("p0_predict_snapshots_*.csv"))
     records = {}
     for key, value in paths.items():
         if isinstance(value, list):
@@ -146,6 +147,19 @@ def load_p0_prior() -> pd.DataFrame:
         return pd.DataFrame(columns=["race_id", "horse_id", "p0_mu_pre"])
     combined = pd.concat(frames, ignore_index=True)
     return combined[["race_id", "race_date", "horse_id", "mu_pre"]].rename(columns={"mu_pre": "p0_mu_pre"})
+
+
+def load_p0_prediction() -> pd.DataFrame:
+    frames = []
+    for path in sorted((BASE_DIR / "p7_forward").glob("p0_predict_snapshots_*.csv")):
+        frame = pd.read_csv(path, usecols=["race_id", "race_date", "horse_id", "mu_pre"], parse_dates=["race_date"])
+        frames.append(frame)
+    if not frames:
+        return pd.DataFrame(columns=["race_id", "race_date", "horse_id", "p0_mu_pre"])
+    combined = pd.concat(frames, ignore_index=True).rename(columns={"mu_pre": "p0_mu_pre"})
+    if combined.duplicated(["race_id", "horse_id"]).any():
+        raise ValueError("P0予測のrace_id・horse_idが重複しています")
+    return combined
 
 
 def cleanup_access_lock_files(directory: str | Path) -> None:
@@ -305,11 +319,13 @@ def build_cache(config: dict) -> tuple[pd.DataFrame, pd.DataFrame]:
     if predictions:
         prediction = pd.concat(predictions, ignore_index=True)
         prediction = merge_master(prediction, master)
-        if not p0.empty:
-            prediction = prediction.merge(p0, on=["race_id", "horse_id"], how="left", validate="many_to_one")
+        p0_prediction = load_p0_prediction().rename(columns={"race_date": "p0_race_date"})
+        p0_for_prediction = pd.concat([p0_prediction, p0], ignore_index=True).drop_duplicates(["race_id", "horse_id"], keep="first")
+        if not p0_for_prediction.empty:
+            prediction = prediction.merge(p0_for_prediction, on=["race_id", "horse_id"], how="left", validate="many_to_one")
         else:
             prediction["p0_mu_pre"] = np.nan
-        prediction["elo_prior_boost"] = SCALE * (prediction["mu_pre"] - prediction["p0_mu_pre"]) if "p0_mu_pre" in prediction else np.nan
+        prediction["elo_prior_boost"] = SCALE * (prediction["mu_pre"] - prediction["p0_mu_pre"])
         prediction = prediction.sort_values(["race_id", "horse_id", "race_date"], kind="stable")
         prediction = prediction.drop_duplicates(["race_id", "horse_id", "record_type"], keep="last")
         merged = pd.concat([merged, prediction], ignore_index=True)
