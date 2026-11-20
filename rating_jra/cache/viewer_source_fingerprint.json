@@ -84,6 +84,11 @@
       "path": "p7_forward/predict_snapshots_20261121.csv",
       "size": 221928,
       "sha256": "d93772922a26aed057462e9ed491a02ea6f991949d1e4e56de868f2c8d025c57"
+    },
+    {
+      "path": "p7_forward/predict_snapshots_20261122.csv",
+      "size": 12704,
+      "sha256": "36545e48dae002110f9f279c4f3c85b0118f636e28af4ee1060b93812847420b"
     }
   ],
   "p0_predict_snapshots": [
@@ -91,6 +96,11 @@
       "path": "p7_forward/p0_predict_snapshots_20261121.csv",
       "size": 118204,
       "sha256": "1b474ffe91a9f9c8c4d56efc95ea7bb2344221bfd494283754f1c719244c4b60"
+    },
+    {
+      "path": "p7_forward/p0_predict_snapshots_20261122.csv",
+      "size": 6786,
+      "sha256": "510430e68bbf0804877a81d9fa37da9aff45cfea8a51dbf13bc38017cfec9050"
     }
   ]
 }
