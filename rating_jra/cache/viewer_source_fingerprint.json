@@ -79,5 +79,11 @@
     "size": 14203,
     "sha256": "ed21e717b4a6d9eb68f96fb60eca1bf61335b2cf0af6c7f818586c5caf62923b"
   },
-  "predict_snapshots": []
+  "predict_snapshots": [
+    {
+      "path": "p7_forward/predict_snapshots_20261121.csv",
+      "size": 221928,
+      "sha256": "d93772922a26aed057462e9ed491a02ea6f991949d1e4e56de868f2c8d025c57"
+    }
+  ]
 }
