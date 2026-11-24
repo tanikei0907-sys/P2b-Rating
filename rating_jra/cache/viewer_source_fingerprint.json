@@ -16,18 +16,18 @@
   },
   "forward_snapshots": {
     "path": "p7_forward/snapshots_2025plus.csv.gz",
-    "size": 22377268,
-    "sha256": "6139c6c774882f4ae6f400afc515da86e4771f8eacfead5f81ce6bd75edfaf50"
+    "size": 22507012,
+    "sha256": "9773138e7a1b7c24a5ab07f7e13e38e6e5041b907ac2f3c55f83e813545ebf27"
   },
   "forward_posts": {
     "path": "p7_forward/post_updates_2025plus.csv.gz",
-    "size": 2287326,
-    "sha256": "f42fb5a8b55df6a68190d4ecbe2324d890cfbb8c5bc23450ce24ffbf4d916d10"
+    "size": 2311144,
+    "sha256": "abb4d164e4f0b26d2b43ddeba17bd052657ec63f7f776030caeee23e38a8e778"
   },
   "forward_anchor": {
     "path": "p7_forward/mu_anchor_daily_2025plus.csv",
-    "size": 55428,
-    "sha256": "0c82a593a9478783536dc81351ce4971a165dd0dbc0380d7d5f397950859e3ed"
+    "size": 56012,
+    "sha256": "bc25a1b118ca2885a932f37d0754228308866a34bab4a866d29cd6b62a51bd2d"
   },
   "p0_snapshots": {
     "path": "stage2_output/snapshots.csv.gz",
@@ -56,8 +56,8 @@
   },
   "forward_residual": {
     "path": "p7_forward/pedigree_residual_history_2025plus.csv.gz",
-    "size": 895052,
-    "sha256": "133ef0eb45191f8340545015db8d319debcb3afe212b4996d0535753835c0883"
+    "size": 900478,
+    "sha256": "11b4f5901b14eb715e1ad3485368f413c51f486e2ae88b83761fe908ff3457fd"
   },
   "p7_config": {
     "path": "p7_propagation/selected_config.json",
