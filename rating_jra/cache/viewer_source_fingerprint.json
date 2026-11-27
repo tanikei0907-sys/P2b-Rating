@@ -94,6 +94,11 @@
       "path": "p7_forward/predict_snapshots_20261123.csv",
       "size": 236504,
       "sha256": "2d3790c450aa85e2c92c0f9ad3aab79ddc21604c2042821a15117e9d00bdcfce"
+    },
+    {
+      "path": "p7_forward/predict_snapshots_20261128.csv",
+      "size": 223799,
+      "sha256": "54afbbd975cb9b598faceb1ff5082d4dc7c8fde30c13c2e170ed979746be94e7"
     }
   ],
   "p0_predict_snapshots": [
@@ -111,6 +116,11 @@
       "path": "p7_forward/p0_predict_snapshots_20261123.csv",
       "size": 126391,
       "sha256": "b44e13a5af44d0225add6f3da2aae38c7a7e8cb97d628a0a39620c29df8f7e99"
+    },
+    {
+      "path": "p7_forward/p0_predict_snapshots_20261128.csv",
+      "size": 120650,
+      "sha256": "0b841ee6b857ced8672e74e3c8c0a7d099b698d7959ba7d4dd44b72d7d227001"
     }
   ]
 }
